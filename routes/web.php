@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Route::get('/home', function(){
     dd(Auth::user());
-});
+})->middleware(['auth', 'verified']);
