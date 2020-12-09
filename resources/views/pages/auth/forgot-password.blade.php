@@ -1,28 +1,35 @@
 @extends('layouts.master')
 
 @section('title')
-Forgot password | E-Shopper
+Forgot password | {{ config('app.name') }}
 @endsection
 
 @section('content')
-<div class="login-form">
-    <h2>Reset password</h2>
-    @if(session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-    @endif
-    <form method="POST" action="{{ route('password.request') }}">
+<div class="forgot-password-form">
+    <form class="form" method="POST" action="{{ route('password.request') }}">
         @csrf
-        <input type="email" placeholder="Email Address" name="email">
-        @error('email')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-        
-        <button type="submit" class="btn btn-default">Reset</button>
+
+        @if(session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+        @endif
+
+        <h3 class="heading">Reset password</h3>
+
+        <div class="form-group">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" id="email" class="form-control @error('email') invalid @enderror" placeholder="Example: averyjordan@mail.com" name="email">
+            @error('email')
+            <span class="form-message" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
+        <button type="submit" class="btn btn-primary">Reset</button>
+
+        <p>Don't have an account? Register <a href="/register">here</a>.</p>
     </form>
-    <p>Don't have an account? Register <a href="/register">here</a>.</p>
 </div>
 @endsection

@@ -1,31 +1,44 @@
 @extends('layouts.master')
 
 @section('title')
-Reset password | E-Shopper
+Reset password | {{ config('app.name') }}
 @endsection
 
 @section('content')
-<div class="login-form">
-    <h2>Reset password</h2>
-    <form method="POST" action="{{ route('password.update') }}">
+<div class="reset-password-form">
+    <form class="form" method="POST" action="{{ route('password.update') }}">
         @csrf
+
+        <h3 class="heading">Reset password</h3>
+
         <input type="hidden" name="token" value="{{ $request->route('token') }}">
-        <input type="email" value={{ $request->email }} name="email">
-        @error('email')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
+
+        <div class="form-group">
+            <label for="email" class="form-label">Emai</label>
+            <input type="email" id="email" class="form-control @error('email') invalid @enderror" value={{ $request->email }} name="email">
+            @error('email')
+            <span class="form-message" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="new-password" class="form-label">New password</label>
+            <input type="password" id="new-password" class="form-control" placeholder="***************" name="password">
+            @error('password')
+            <span class="form-message" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
         
-        <input type="password" placeholder="New password" name="password">
-        @error('password')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-        <input type="password" placeholder="Confirm password" name="password_confirmation">
-        <button type="submit" class="btn btn-default">Update</button>
+        <div class="form-group">
+            <label for="password-confirmation" class="form-label">Re-enter new password</label>
+            <input type="password" id="password-confirmation" class="form-control" placeholder="***************" name="password_confirmation">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update</button>
     </form>
-    <p>Don't have an account? Register <a href="/register">here</a>.</p>
 </div>
 @endsection

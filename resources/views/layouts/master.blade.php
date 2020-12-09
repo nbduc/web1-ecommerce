@@ -15,7 +15,7 @@
 <body>
 	@include("includes.header")
 	<section>
-		<div class="container">
+		<div class="main">
             @yield('content')
 		</div>
 	</section>

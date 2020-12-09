@@ -1,7 +1,136 @@
 :root {
-    --primary-color: rgb(238, 77, 45);
+    --primary-color:  rgb(77,162,252);
+    --danger-color: #f33a58;
     --white-color: #fff;
     --black-color: #000;
     --text-color: #333;
     --border-color: #dbdbdb;
+}
+
+/* button */
+
+.btn {
+    outline: none;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 1px 1px 18px rgba(0 , 0, 0, 0.2);
+}
+
+.btn:hover {
+    opacity: 0.9;
+    box-shadow: 1px 1px 10px rgba(0 , 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color) 12%, rgba(0,225,250,1) 100%);
+}
+
+/* form */
+
+.form {
+    width: 460px;
+    min-height: 100px;
+    padding: 32px 24px;
+    text-align: center;
+    background: #fff;
+    border-radius: 2px;
+    margin: 24px;
+    align-self: center;
+    box-shadow: 0 2px 5px 0 rgba(51, 62, 73, 0.1);
+}
+
+.form .heading {
+    font-size: 46px;
+}
+
+.form .desc {
+    text-align: center;
+    color: #636d77;
+    font-size: 16px;
+    font-weight: lighter;
+    line-height: 24px;
+    margin-top: 16px;
+    font-weight: 300;
+}
+
+.form-group {
+    display: flex;
+    margin-bottom: 16px;
+    flex-direction: column;
+}
+
+.form-group.form-checkbox {
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-group.form-checkbox .form-label {
+    padding: 0;
+    margin-left: 10px;
+}
+
+.form-label, .form-message {
+    text-align: left;
+}
+
+.form-label {
+    font-weight: 650;
+    padding-bottom: 6px;
+    line-height: 18px;
+    font-size: 14px;
+}
+
+.form-control {
+    height: 40px;
+    padding: 8px 12px;
+    border: 1px solid #b3b3b3;
+    border-radius: 3px;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-control:hover {
+    border-color:  rgba(0,225,250,1);
+}
+
+.form-control.invalid {
+    border-color: var(--danger-color);
+}
+
+.form-control.invalid ~ .form-message {
+    color: var(--danger-color);
+}
+
+.form-message {
+    font-size: 12px;
+    line-height: 1.6rem;
+    padding: 4px 0 0;
+}
+
+/* alert */
+.alert {
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white-color);
+    background-color: #383D41;
+    box-shadow: 1px 1px 10px rgba(0 , 0, 0, 0.2);
+    opacity: 0.6;
+}
+
+.alert-success {
+    background-color: #00c853;
+}
+
+.alert-danger {
+    background-color:#dd2c00;
 }

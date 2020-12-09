@@ -1,35 +1,55 @@
 @extends('layouts.master')
 
 @section('title')
-Register | E-Shopper
+Register | {{ config('app.name') }}
 @endsection
 
 @section('content')
 <div class="signup-form">
-    <h2>New User Signup!</h2>
-    <form method="POST" action="{{ route('register') }}">
-    @csrf
-        <input type="text" placeholder="Name" @error('name') is-invalid @enderror name="name">
-        @error('name')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-        <input type="email" placeholder="Email Address" name="email">
-        @error('email')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-        <input type="password" placeholder="Password" name="password">
-        @error('password')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-        <input type="password" placeholder="Confirm password" name="password_confirmation">
-        <button type="submit" class="btn btn-default">Signup</button>
+    <form class="form" method="POST" action="{{ route('register') }}">
+        @csrf
+
+        <h3 class="heading">Register</h3>
+        <p class="desc">Create your account. It's only take a minute.</p>
+
+        <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control @error('name') invalid @enderror" placeholder="Example: Avery Jordan" name="name">
+            @error('name')
+            <span class="form-message" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control @error('email') invalid @enderror" placeholder="Example: averyjordan@mail.com" name="email">
+            @error('email')
+            <span class="form-message" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control @error('password') invalid @enderror" placeholder="***************" name="password">
+            @error('password')
+            <span class="form-message" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+        
+        <div class="form-group">
+            <label for="password_confirmation" class="form-label">Re-enter password</label>
+            <input type="password" id="password_confirmation" class="form-control" placeholder="***************" name="password_confirmation">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Signup</button>
+        
+        <p>Already have an account? Login <a href="/login">here</a>.</p>
     </form>
-    <p>Already have an account? Login <a href="/login">here</a>.</p>
 </div>
 @endsection

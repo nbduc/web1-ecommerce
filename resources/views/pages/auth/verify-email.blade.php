@@ -1,20 +1,24 @@
 @extends('layouts.master')
 
 @section('title')
-Login | E-Shopper
+Login | {{ config('app.name') }}
 @endsection
 
 @section('content')
-<div class="login-form">
-    <h2>You must verify your email address. Please check your email for a verification link.</h2>
-    @if(session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-    @endif
+<div class="verify-email-form">
+    
     <form method="POST" action="{{ route('verification.send') }}">
         @csrf
-        <button type="submit" class="btn btn-default">Re-send email</button>
+
+        @if(session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+        @endif
+
+        <p class="desc">You must verify your email address. Please check your email for a verification link.</p>
+
+        <button type="submit" class="btn btn-primary">Re-send email</button>
     </form>
 </div>
 @endsection

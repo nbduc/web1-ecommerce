@@ -1,0 +1,15 @@
+.main {
+    background-color: rgb(245,245,245);
+}
+
+.signup-form, 
+.login-form, 
+.forgot-password-form,
+.reset-password-form,
+.verify-email-form {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

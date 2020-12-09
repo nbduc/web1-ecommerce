@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Profile | E-Shopper
+Profile | {{ config('app.name') }}
 @endsection
 
 @section('content')
