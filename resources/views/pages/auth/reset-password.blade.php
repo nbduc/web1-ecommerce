@@ -15,7 +15,8 @@ Reset password | {{ config('app.name') }}
 
         <div class="form-group">
             <label for="email" class="form-label">Emai</label>
-            <input type="email" id="email" class="form-control @error('email') invalid @enderror" value={{ $request->email }} name="email">
+            <input type="email" id="email" class="form-control @error('email') invalid @enderror" 
+            value={{ $request->email }} name="email">
             @error('email')
             <span class="form-message" role="alert">
                 <strong>{{ $message }}</strong>

@@ -13,7 +13,8 @@ Login | {{ config('app.name') }}
 
         <div class="form-group">
             <label for="email" class="form-label">Email Address</label>
-            <input type="email" id="email" class="form-control @error('email') invalid @enderror" placeholder="Example: averyjordan@mail.com" name="email">
+            <input type="email" id="email" class="form-control @error('email') invalid @enderror" 
+            placeholder="Example: averyjordan@mail.com" name="email" value="{{ old('email') }}">
             @error('email')
             <span class="form-message" role="alert">
                 <strong>{{ $message }}</strong>
@@ -23,7 +24,8 @@ Login | {{ config('app.name') }}
 
         <div class="form-group">
             <label for="password" class="form-label">Password</label>
-            <input type="password" id="password" class="form-control @error('password') invalid @enderror" placeholder="***************" name="password">
+            <input type="password" id="password" class="form-control @error('password') invalid @enderror" 
+            placeholder="***************" name="password">
             @error('password')
             <span class="form-message" role="alert">
                 <strong>{{ $message }}</strong>

@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function(){
-    dd(Auth::user());
+    return view('pages.common.home');
 })->middleware(['auth', 'verified']);
