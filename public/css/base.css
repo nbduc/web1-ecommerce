@@ -1,11 +1,12 @@
 :root {
-    --primary-color:  rgb(77,162,252);
+    --primary-color: rgb(77, 162, 252);
     --danger-color: #f33a58;
     --white-color: #fff;
     --black-color: #000;
     --text-color: #333;
     --border-color: #dbdbdb;
 }
+
 
 /* button */
 
@@ -19,18 +20,19 @@
     font-size: 14px;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 1px 1px 18px rgba(0 , 0, 0, 0.2);
+    box-shadow: 1px 1px 18px rgba(0, 0, 0, 0.2);
 }
 
 .btn:hover {
     opacity: 0.9;
-    box-shadow: 1px 1px 10px rgba(0 , 0, 0, 0.2);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary {
     background: var(--primary-color);
-    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color) 12%, rgba(0,225,250,1) 100%);
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-color) 12%, rgba(0, 225, 250, 1) 100%);
 }
+
 
 /* form */
 
@@ -76,7 +78,8 @@
     margin-left: 10px;
 }
 
-.form-label, .form-message {
+.form-label,
+.form-message {
     text-align: left;
 }
 
@@ -97,14 +100,14 @@
 }
 
 .form-control:hover {
-    border-color:  rgba(0,225,250,1);
+    border-color: rgba(0, 225, 250, 1);
 }
 
 .form-control.invalid {
     border-color: var(--danger-color);
 }
 
-.form-control.invalid ~ .form-message {
+.form-control.invalid~.form-message {
     color: var(--danger-color);
 }
 
@@ -114,23 +117,42 @@
     padding: 4px 0 0;
 }
 
+
 /* alert */
+
 .alert {
-    padding: 12px 16px;
-    margin: 10px 0;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--white-color);
-    background-color: #383D41;
-    box-shadow: 1px 1px 10px rgba(0 , 0, 0, 0.2);
-    opacity: 0.6;
+    border: 0;
+    border-radius: 3px;
+    color: #FFFFFF;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    position: relative;
 }
 
-.alert-success {
-    background-color: #00c853;
+.alert.alert-success {
+    background-color: #7ed6a5;
 }
 
-.alert-danger {
-    background-color:#dd2c00;
+.alert.alert-danger {
+    background-color: #f1926e;
+}
+
+.alert.alert-warning {
+    background-color: #fccf71;
+}
+
+.alert.alert-info {
+    background-color: #66c4de;
+}
+
+.alert.alert-primary {
+    background-color: #65d1d4;
+}
+
+.alert.alert-default {
+    background-color: #736e67;
+}
+
+.alert.alert-with-icon {
+    padding-left: 65px;
 }

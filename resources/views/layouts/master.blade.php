@@ -19,6 +19,7 @@
             @yield('content')
 		</div>
 	</section>
-	@include("includes.footer")
+    @include("includes.footer")
+    <script src="{{ asset('js/base.js') }}"></script>
 </body>
 </html>
