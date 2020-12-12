@@ -23,6 +23,7 @@
                         <th>Name</th>
                         <th>E-mail</th>
                         <th>Email verified at</th>
+                        <th>Roles</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -35,6 +36,13 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->email_verified_at }}</td>
+                            <td>
+                                @foreach($user->roles as $role)
+                                <span class="{{ $role->class }}">
+                                    {{ $role->name }}
+                                </span>
+                                @endforeach
+                            </td>
                             <td>
                                 <a href="{{ url('/users/' . $user->id) }}"
                                     class="btn btn-block btn-primary" role="button">View</a>
