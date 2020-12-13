@@ -20,6 +20,7 @@
         <div class="c-body">
             <main class="c-main">
                 <div class="container-fluid">
+                    @include('admin.includes.alert')
                     @yield('content')
                 </div>
             </main>

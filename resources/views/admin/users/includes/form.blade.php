@@ -1,20 +1,35 @@
 @csrf
 <div class="form-group">
     <label for="name">Name</label>
-    <input class="form-control" type="text" placeholder="Example: Avery Jordan" name="name" required
-        value="@isset($user){{ $user->name }}@endisset">
+    <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Example: Avery Jordan" name="name" required
+        value="{{ old('name') }}@isset($user){{ $user->name }}@endisset">
+    @error('name')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 
 <div class="form-group">
     <label for="email">Email</label>
-    <input class="form-control" id="text" name="email" placeholder="Example: averyjordan@mail.com" required
-    value="@isset($user){{ $user->email }}@endisset">
+    <input class="form-control @error('email') is-invalid @enderror" id="text" name="email" placeholder="Example: averyjordan@mail.com" required
+    value="{{ old('email') }}@isset($user){{ $user->email }}@endisset">
+    @error('email')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 
 @isset($create)
 <div class="form-group">
     <label for="password">Password</label>
-    <input class="form-control" type="password" placeholder="*************" name="password" required="">
+    <input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="*************" name="password" required="">
+    @error('password')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 @endisset
 
