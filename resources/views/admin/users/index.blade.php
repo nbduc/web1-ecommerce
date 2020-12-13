@@ -13,10 +13,22 @@
         </div>
         <div class="card-body">
             <div class="row"> 
-                <a href="{{ route('admin.users.create') }}" class="btn btn-primary m-2">Create new user</a>
+                <div class="col-md-3">
+                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary m-2">Create new user</a>
+                </div>
+                <div class="col-md-6">
+                    <form class="mt-2 mb-2" action="{{ route('admin.users.search') }}" method="GET">
+                        <div class="input-group">
+                            <input type="search" name="search" class="form-control" placeholder="Search with name or email">
+                            <span class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
             <br>
-            <table class="table table-responsive-sm table-striped">
+            <table class="table table-responsive-sm table-striped" id="users_table">
                 <thead>
                     <tr>
                         <th>#Id</th>
@@ -44,7 +56,7 @@
                                 @endforeach
                             </td>
                             <td>
-                                <a href="{{ url('/users/' . $user->id) }}"
+                                <a href="{{ route('admin.users.show', $user->id) }}"
                                     class="btn btn-block btn-primary" role="button">View</a>
                             </td>
                             <td>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -50,6 +51,18 @@ class UserController extends Controller
         return redirect(route('admin.users.index'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $users = User::where('name', 'like', '%' . $search . '%')
+            ->orWhere('email', $search)
+            ->paginate(5);
+        return view('admin.users.index', [
+            'users' => $users,
+            'you' => Auth::user(),
+            ]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -58,7 +71,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('admin.users.show', [
+            'user' => User::find($id),
+        ]);
     }
 
     /**

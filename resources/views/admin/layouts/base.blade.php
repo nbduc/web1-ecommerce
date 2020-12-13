@@ -26,6 +26,8 @@
             @include('admin.includes.footer')
         </div>
     </div>
+
+    @yield('js')
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then CoreUI JS -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>

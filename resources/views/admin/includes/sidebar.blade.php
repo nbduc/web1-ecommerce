@@ -1,6 +1,8 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand">
-        Admin {{ config('app.name') }}
+        <h4>{{ config('app.name') }}
+            <span class="badge badge-pill badge-success">Admin</span>
+        </h4>
     </div>
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item">

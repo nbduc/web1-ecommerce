@@ -24,5 +24,6 @@ Route::get('/home', function(){
 
 //Admin routes
 Route::prefix('admin')->name('admin.')->group(function() {
+    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');;
     Route::resource('/users', UserController::class);
 });

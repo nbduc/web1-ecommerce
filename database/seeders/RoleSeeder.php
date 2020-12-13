@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->insert([
             ['name' => 'Admin', 'class' => 'badge badge-pill badge-warning', 'created_at' => now()], 
-            ['name' => 'Customer', 'class' => 'badge badge-pill badge-primary', 'created_at' => now()]
+            ['name' => 'Customer', 'class' => 'badge badge-pill badge-primary', 'created_at' => now()],
         ]);
     }
 }
