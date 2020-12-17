@@ -23,7 +23,7 @@ Route::get('/home', function(){
 })->middleware(['auth', 'verified']);
 
 //Admin routes
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
     Route::get('/users/search', [UserController::class, 'search'])->name('users.search');;
     Route::resource('/users', UserController::class);
 });

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -19,6 +20,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        if(Gate::denies('logged-in')){
+            dd('no access allowed');
+        }
         $users = User::paginate(20);
 
         return view('admin.users.index', [
