@@ -8,7 +8,9 @@ Register | {{ config('app.name') }}
 <div class="signup-form">
     <form class="form" method="POST" action="{{ route('register') }}">
         @csrf
-
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="logo">
+        </a>
         <h3 class="heading">Register</h3>
         <p class="desc">Create your account. It's only take a minute.</p>
 

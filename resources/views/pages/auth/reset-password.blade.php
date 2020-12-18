@@ -8,7 +8,9 @@ Reset password | {{ config('app.name') }}
 <div class="reset-password-form">
     <form class="form" method="POST" action="{{ route('password.update') }}">
         @csrf
-
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="logo">
+        </a>
         <h3 class="heading">Reset password</h3>
 
         <input type="hidden" name="token" value="{{ $request->route('token') }}">

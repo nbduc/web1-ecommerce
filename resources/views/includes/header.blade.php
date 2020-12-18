@@ -13,9 +13,18 @@
                     <div class="header__auth-links">
                         @if(Route::has('login'))
                             @auth
-                                <a href="{{ route('logout') }}" class="header__links" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>@csrf</form>
-                                <a href="{{ url('/profile') }}" class="header__links">Profile</a>
+                                <span class="header__profile">
+                                    Hello, {{$you->name}}
+                                    <ul class="header__profile-list">
+                                        <li class="header__profile-item">
+                                            <a href="{{ url('/profile') }}">Profile</a>
+                                        </li>
+                                        <li class="header__profile-item">
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>@csrf</form>
+                                        </li>
+                                    </ul>
+                                </span>
                             @else
                                 <a href="{{ route('login') }}" class="header__links">Sign in</a>
                                 @if(Route::has('register'))

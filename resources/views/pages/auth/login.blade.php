@@ -9,6 +9,9 @@ Login | {{ config('app.name') }}
     
     <form class="form" method="POST" action="{{ route('login') }}">
         @csrf
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="logo">
+        </a>
         <h3 class="heading">Sign into your account</h3>
 
         <div class="form-group">

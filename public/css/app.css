@@ -3,6 +3,7 @@
 .forgot-password-form,
 .reset-password-form,
 .verify-email-form {
+    background-color: rgb(245, 245, 245);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -54,6 +55,90 @@
 .header__text--spacer {
     margin: 0 8px;
     color: rgba(255, 255, 255, 0.7);
+}
+
+.header__profile {
+    cursor: pointer;
+    color: #fff;
+    position: relative;
+}
+
+.header__profile:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.header__profile:hover .header__profile-list {
+    display: block;
+}
+
+.header__profile-list {
+    position: absolute;
+    top: 150%;
+    right: 0;
+    min-width: 200px;
+    z-index: 1;
+    background-color: #fff;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none;
+    border-radius: 2px;
+    transform-origin: calc(100% - 32px) top;
+    animation: headerProfileGrowth ease-in 0.1s;
+}
+
+.header__profile-list::before {
+    content: "";
+    border: solid;
+    border-width: 20px 27px;
+    border-color: transparent transparent var(--white-color) transparent;
+    position: absolute;
+    right: 0;
+    top: -29px;
+    z-index: -1;
+}
+
+.header__profile-list::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 0;
+    height: 10px;
+    width: 100px;
+    background-color: transparent;
+}
+
+.header__profile-item a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #0A1829;
+}
+
+.header__profile-item:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.header__profile-item:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.header__profile-item:hover {
+    background-color: rgb(245, 245, 245);
+}
+
+@keyframes headerProfileGrowth {
+    /* scale: độ to nhỏ */
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .header-with-search {

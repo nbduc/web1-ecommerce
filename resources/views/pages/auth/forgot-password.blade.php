@@ -9,6 +9,10 @@ Forgot password | {{ config('app.name') }}
     <form class="form" method="POST" action="{{ route('password.request') }}">
         @csrf
 
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="logo">
+        </a>
+
         @if(session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}

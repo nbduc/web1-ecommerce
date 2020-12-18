@@ -10,6 +10,10 @@ Login | {{ config('app.name') }}
     <form method="POST" action="{{ route('verification.send') }}">
         @csrf
 
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('images/logo.png') }}" alt="logo">
+        </a>
+
         @if(session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
