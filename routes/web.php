@@ -26,7 +26,7 @@ Route::get('/profile', function () {
 })->middleware('auth');
 
 //Admin routes
-Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(function() {
+Route::prefix('admin')->middleware(['auth', 'verified', 'can:is-admin'])->name('admin.')->group(function() {
     Route::get('/users/search', [UserController::class, 'search'])->name('users.search');;
     Route::resource('/users', UserController::class);
 });

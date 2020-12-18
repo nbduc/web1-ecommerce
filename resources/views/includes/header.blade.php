@@ -17,12 +17,30 @@
                                     Hello, {{$you->name}}
                                     <ul class="header__profile-list">
                                         <li class="header__profile-item">
-                                            <a href="{{ url('/profile') }}">Profile</a>
+                                            <a href="{{ url('/profile') }}">
+                                                <i class="far fa-user"></i>
+                                                <span class="header__text--spacer"></span>
+                                                Profile
+                                            </a>
                                         </li>
                                         <li class="header__profile-item">
-                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                                <span class="header__text--spacer"></span>
+                                                Logout
+                                            </a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>@csrf</form>
                                         </li>
+                                        @can(['is-admin'])
+                                        <hr class="small-hr">
+                                        <li class="header__profile-item">
+                                            <a href="{{ route('admin.users.index') }}">
+                                                <i class="fas fa-users"></i>
+                                                <span class="header__text--spacer"></span>
+                                                User management
+                                            </a>
+                                        </li>
+                                        @endcan
                                     </ul>
                                 </span>
                             @else

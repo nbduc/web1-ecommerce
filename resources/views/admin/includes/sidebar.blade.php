@@ -1,8 +1,6 @@
 <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
     <div class="c-sidebar-brand">
-        <h4>{{ config('app.name') }}
-            <span class="badge badge-pill badge-success">Admin</span>
-        </h4>
+        <a href="{{ url('/') }}"><img src="{{ asset('images/logo2.png') }}" alt="logo"></a>
     </div>
     <ul class="c-sidebar-nav">
         <li class="c-sidebar-nav-item">

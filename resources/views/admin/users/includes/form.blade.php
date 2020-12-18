@@ -36,7 +36,7 @@
 @foreach ($roles as $role)
     <div class="form-check">
         <input class="form-check-input" name="roles[]" type="checkbox" value="{{ $role->id }}" id="{{ $role->name }}"
-            @isset($user) @if(in_array($role->id, $user->roles->pluck('id')->toArray())) checked @endif @endisset>
+            @isset($user) @if($user->roles->pluck('id')->contains($role->id)) checked @endif @endisset>
         <label for="{{ $role->name }}" class="form-check-label">{{ $role->name }}</label>
     </div>
 @endforeach

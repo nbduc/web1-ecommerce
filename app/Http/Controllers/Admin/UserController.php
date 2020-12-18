@@ -19,9 +19,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        if(Gate::denies('logged-in')){
-            dd('no access allowed');
-        }
         $users = User::paginate(20);
 
         return view('admin.users.index', [
@@ -37,7 +34,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create', ['roles' => Role::all()]);
+        return view('admin.users.create', [
+            'roles' => Role::all(),
+            'you' => Auth::user()
+            ]);
     }
 
     /**
@@ -81,6 +81,7 @@ class UserController extends Controller
     {
         return view('admin.users.show', [
             'user' => User::find($id),
+            'you' => Auth::user()
         ]);
     }
 
@@ -95,6 +96,7 @@ class UserController extends Controller
         return view('admin.users.edit', [
             'roles' => Role::all(),
             'user' => User::find($id),
+            'you' => Auth::user()
             ]
         );
     }
@@ -115,7 +117,11 @@ class UserController extends Controller
         }
 
         $user->update($request->except(['_token', 'roles']));
-        $user->roles()->sync($request->roles);
+
+        //Không cho phép người dùng tự chỉnh sửa role
+        if (Gate::denies('is-me', $id)) {
+            $user->roles()->sync($request->roles);
+        }
 
         $request->session()->flash('success', "You have edited the user.");
 
@@ -130,8 +136,12 @@ class UserController extends Controller
      */
     public function destroy($id, Request $request)
     {
-        User::destroy($id);
-        $request->session()->flash('success', "You have deleted the user.");
+        if (Gate::allows('is-me', $id)) {
+            $request->session()->flash('error', "You don't have permission to delete this user!");
+        } else {
+            User::destroy($id);
+            $request->session()->flash('success', "You have deleted the user.");
+        }
         return redirect(route('admin.users.index'));
     }
 }

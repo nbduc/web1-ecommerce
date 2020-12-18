@@ -186,3 +186,7 @@
 .alert.alert-with-icon {
     padding-left: 65px;
 }
+
+.small-hr {
+    margin: 10px 0;
+}
