@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.blank')
 
 @section('title')
 Login | {{ config('app.name') }}

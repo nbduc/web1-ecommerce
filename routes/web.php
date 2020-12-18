@@ -15,15 +15,15 @@ use App\Http\Controllers\Admin\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.common.home');
 });
 
-Route::get('/home', function(){
-    return view('pages.common.home');
-})->middleware(['auth', 'verified']);
+Route::get('/profile', function () {
+    return view('pages.common.profile');
+})->middleware('auth');
 
 //Admin routes
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function() {
+Route::prefix('admin')->middleware(['auth', 'verified'])->name('admin.')->group(function() {
     Route::get('/users/search', [UserController::class, 'search'])->name('users.search');;
     Route::resource('/users', UserController::class);
 });
