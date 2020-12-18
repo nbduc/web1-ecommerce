@@ -121,6 +121,29 @@
     padding: 4px 0 0;
 }
 
+.form-vertical form {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-vertical .form-control {
+    flex: 1;
+}
+
+.form-vertical button {
+    height: 40px;
+    width: 30%;
+    outline: none;
+    border: 0;
+    margin-left: 2px;
+    text-transform: uppercase;
+    background-color: #DCDCDC;
+}
+
+.form-vertical button:hover {
+    background-color: #C3C3C3;
+}
+
 
 /* alert */
 
