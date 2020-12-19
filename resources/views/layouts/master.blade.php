@@ -18,6 +18,7 @@
     <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    @yield('css')
 </head>
 
 <body>
@@ -31,5 +32,6 @@
         @include("includes.footer")
     </div>
     <script src="{{ asset('js/base.js') }}"></script>
+    @yield('js')
 </body>
 </html>
