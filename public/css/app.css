@@ -402,3 +402,11 @@
 .product-list-item__vote-icon {
     color: #DD2525;
 }
+
+/* toast */
+#toast{
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 2;
+}

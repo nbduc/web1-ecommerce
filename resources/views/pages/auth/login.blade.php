@@ -37,11 +37,10 @@ Login | {{ config('app.name') }}
         </div>
 
         <span class="form-group form-checkbox">
-            <input type="checkbox" id="remember" name="remember">
-            <label for="remember" class="form-label">Keep me signed in</label>
+            <input type="checkbox" id="remember" name="remember" {{ old('remember')? 'checked' : '' }}>
+            <label for="remember" class="form-label">{{ __('Keep me signed in') }}</label>
         </span>
         <button type="submit" class="btn btn-primary">Login</button>
-
         <p>Don't have an account? Register <a href="/register">here</a>.</p>
         <p><a href="/forgot-password">Forgot your password?</a></p>
     </form>

@@ -10,6 +10,10 @@
 
 @section('content')
 <div class="container">
+    <div id="toast">
+        
+    </div>
+    
     <section class="main__carousel">
         <div class="carousel" data-flickity='{ "autoPlay": true }'>
             <div class="carousel-cell"></div>
@@ -167,4 +171,24 @@
 
 @section('js')
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+@auth
+    @if(url()->previous() == route('login'))
+    <script>
+        toast({
+            title: 'Login Successful',
+            message: 'Welcome back!',
+            type: 'success'
+        });
+    </script>
+    @endif
+    @if(!$you->hasVerifiedEmail())
+    <script>
+        toast({
+            title: 'Verify email',
+            message: 'You need to confirm your account. Please check your email.',
+            type: 'warning'
+        });
+    </script>
+    @endif
+@endauth
 @endsection
