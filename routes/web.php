@@ -23,6 +23,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/product/1', function () {
+    return view('pages.common.product', [
+        'you' => Auth::user(),
+    ]);
+});
+
 Route::prefix('profile')->middleware('auth')->name('profile.')->group(function(){
     Route::get('/', [ProfilesController::class, 'show'])->name('show');
 });

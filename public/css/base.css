@@ -302,3 +302,24 @@
 .toast--error .toast__icon{
     color: #ff623d;
 }
+
+/* breadcrumb */
+.breadcrumb {
+    font-size: 13px;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 30px;
+    height: 52px;
+}
+.breadcrumb a:first-child, .breadcrumb span:first-child {
+    padding-left: 0;
+}
+.breadcrumb a, .breadcrumb span {
+    display: inline-block;
+    padding: 15px 7px 15px 0;
+    margin-right: 7px;
+    overflow: hidden;
+}
+.breadcrumb a {
+    color: #585858;
+    text-decoration: none;
+}
