@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -21,12 +23,14 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/profile', function () {
-    return view('pages.common.profile');
-})->middleware('auth');
+Route::prefix('profile')->middleware('auth')->name('profile.')->group(function(){
+    Route::get('/', [ProfilesController::class, 'show'])->name('show');
+});
 
 //Admin routes
 Route::prefix('admin')->middleware(['auth', 'verified', 'can:is-admin'])->name('admin.')->group(function() {
-    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');;
+    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
     Route::resource('/users', UserController::class);
+    Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+    Route::resource('/products', ProductController::class);
 });

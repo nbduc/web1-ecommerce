@@ -12,6 +12,7 @@
     <!-- CoreUI CSS -->
     <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css" crossorigin="anonymous">
 
+    @yield('css')
     <title>@yield('title')</title>
 </head>
 
@@ -31,11 +32,11 @@
         </div>
     </div>
 
-    @yield('js')
     <!-- Optional JavaScript -->
     <!-- Popper.js first, then CoreUI JS -->
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/@coreui/coreui/dist/js/coreui.min.js"></script>
+    @yield('js')
 </body>
 
 </html>

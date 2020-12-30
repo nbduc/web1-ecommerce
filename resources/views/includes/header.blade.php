@@ -40,6 +40,13 @@
                                                 User management
                                             </a>
                                         </li>
+                                        <li class="header__profile-item">
+                                            <a href="{{ route('admin.products.index') }}">
+                                                <i class="fas fa-users"></i>
+                                                <span class="header__text--spacer"></span>
+                                                Product management
+                                            </a>
+                                        </li>
                                         @endcan
                                     </ul>
                                 </span>

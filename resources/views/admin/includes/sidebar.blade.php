@@ -10,6 +10,9 @@
             <a href="{{ route('admin.users.index') }}" class="c-sidebar-nav-link">User Management</a>
         </li>
         <li class="c-sidebar-nav-item">
+            <a href="{{ route('admin.products.index') }}" class="c-sidebar-nav-link">Product Management</a>
+        </li>
+        <li class="c-sidebar-nav-item">
             <a href="{{ route('logout') }}" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>@csrf</form>
         </li>

@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -15,5 +18,15 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::factory()->times(43)->create();
+        //create admin
+        $roles = Role::all();
+        User::create([
+            'name' => 'Admin', 
+            'email' => 'admin@mail.test', 
+            'email_verified_at' => now(),
+            'password' => Hash::make('123456789'),
+        ])->roles()->attach(
+            $roles->where('name', 'Admin')->pluck('id')
+        );
     }
 }
