@@ -10,10 +10,7 @@
 
 @section('content')
 <div class="container">
-    <div id="toast">
-        
-    </div>
-    
+    <div id="toast"></div>
     <section class="main__carousel">
         <div class="carousel" data-flickity='{ "autoPlay": true }'>
             <div class="carousel-cell"></div>

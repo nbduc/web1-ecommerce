@@ -195,7 +195,7 @@
     align-items: center;
     color: #fff;
     height: 45px;
-    width: 100px;
+    min-width: 100px;
     background-color: #0F243D;
     margin-left: 10px;
     text-transform: uppercase;
@@ -206,7 +206,11 @@
     position: relative;
 }
 
-.header-btn:hover {
+.header__votes-btn {
+    width: 180px;
+}
+
+.header-btn:hover,.header-btn:focus{
     background-color: #0A1829;
     color: #fff;
     text-decoration: none;
@@ -417,6 +421,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: top center;
+    transition: all linear .1s;
 }
 .product_images-wrapper--hidden {
     display: none;
@@ -456,7 +461,14 @@
 .product_votes {
     font-size: 18px;
 }
+.product_votes a{
+    text-decoration: none;
+    color: #585858;
+}
 .product_votes i {
+
+}
+.product_votes.product_votes--voted i{
     color: #DD2525;
 }
 

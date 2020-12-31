@@ -10,6 +10,7 @@
 
 @section('content')
 <div class="container">
+    <div id="toast"></div>
     <nav class="breadcrumb" role="navigation">
         <a href="{{ url('/') }}" title="Back to the frontpage">Home</a>
         <span class="divider" aria-hidden="true">›</span>
@@ -31,9 +32,11 @@
             <div>
                 <ul class="product_meta">
                     <li class="product_price"><span>$18,55</span></li>
-                    <li class="product_votes">
-                        <i class="fas fa-heart"></i>
-                        <span>10</span>
+                    <li class="product_votes product_votes--voted">
+                        <a href="javascript:;" onclick="addToFavourites(this);">
+                            <i class="fas fa-heart"></i>
+                            <span>10</span>
+                        </a>
                     </li>
                 </ul>
                 <form action="#" method="POST" class="product_payment-form" enctype="multipart/form-data">
@@ -65,6 +68,20 @@
     function showImg(e) {
         var imgWrapper = document.querySelector(".product_images-wrapper");
         imgWrapper.style.backgroundImage = e.currentTarget.style.backgroundImage;
+    }
+</script>
+<script>
+    function addToFavourites(element) {
+        postData('/user/favourites', { productId: 1 })
+        .then(messages => {
+            Object.keys(messages).forEach(function (key) {
+                toast({
+                    title: 'Message from server',
+                    message: messages[key],
+                    type: key
+                });
+            });
+        });
     }
 </script>
 @endsection

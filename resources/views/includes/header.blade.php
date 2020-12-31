@@ -17,7 +17,7 @@
                                     Hello, {{$you->name}}
                                     <ul class="header__profile-list">
                                         <li class="header__profile-item">
-                                            <a href="{{ url('/profile') }}">
+                                            <a href="{{ route('user.index') }}">
                                                 <i class="far fa-user"></i>
                                                 <span class="header__text--spacer"></span>
                                                 Profile
@@ -69,15 +69,15 @@
                             </button>
                         </form>
 
-                        <a href="/cart" class="header__cart-btn header-btn">
+                        <a href="{{ route('user.cart.index') }}" class="header__cart-btn header-btn">
                             <i class="fas fa-shopping-cart"></i>
                             Cart 
                             <span class="header__cart-count">0</span>
                         </a>
 
-                        <a href="/votes" class="header__votes-btn header-btn">
+                        <a href="{{ route('user.favourites.index') }}" class="header__votes-btn header-btn">
                             <i class="fas fa-heart"></i>
-                            Votes
+                            My favourites
                         </a>
                     </div>
                 </div>
