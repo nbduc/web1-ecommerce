@@ -52,6 +52,36 @@
             
         </div>
     </div>
+    <hr>
+    <div class="box-comment row">
+        <div class="col-md-8">
+            <h2 class="box-comment__title">
+                <span>Comments</span>
+                <span class="box-comment__count">18 comments</span>
+            </h2>
+            <div class="box-comment__list">
+                <p class="box-comment__list-title"><strong>Leave a Comment</strong></p>
+                <div class="box-comment__list-textarea">
+                    <textarea name="comment" id="comment" rows="3" placeholder="Type your comment here"></textarea>
+                    <button class="btn btn-primary">Post</button>
+                </div>
+                <div class="box-comment__list-item">
+                    <div class="box-comment__avatar-text">X</div>
+                    <div class="box-comment__main">
+                        <h3 class="box-comment__user-name">XSon</h3>
+                        <p>The screen on this laptop is worth the price by itself. Gorgeous, black is actually black, it rivals my AOC gaming desktop monitor.</p>
+                    </div>
+                </div>
+                <div class="box-comment__list-item">
+                    <div class="box-comment__avatar-text">W</div>
+                    <div class="box-comment__main">
+                        <h3 class="box-comment__user-name">Will</h3>
+                        <p>For what you're paying for the Screen and camera quality is what you pay for. There is a hard drive slot if you choose to expand your storage.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 

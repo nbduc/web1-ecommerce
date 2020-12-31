@@ -479,3 +479,79 @@
 .product_payment-buttons {
     max-width: 30%;
 }
+
+/* box-comment */
+.box-comment {
+    margin-bottom: 20px;
+}
+
+.box-comment__title {
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.box-comment__count {
+    font-size: 14px;
+    font-weight: 300;
+    text-transform: lowercase;
+}
+
+.box-comment__list-title {
+    font-size: 16px;
+}
+
+.box-comment__list-textarea{
+    position: relative;
+}
+
+.box-comment__list-textarea textarea{
+    width: 100%;
+    background: #f3f5f8;
+    height: 120px;
+    padding: 16px;
+    border-radius: 2px;
+    resize: none;
+    outline: 0;
+    border: solid 1px transparent;
+}
+
+.box-comment__list-textarea textarea:focus,
+.box-comment__list-textarea textarea:hover {
+    border: solid 1px var(--primary-color);
+    transition: all linear .3s;
+}
+
+.box-comment__list-textarea button {
+    position: absolute;
+    bottom: 15px;
+    right: 10px;
+    width: 80px;
+}
+
+.box-comment__list-item {
+    margin-top: 20px;
+    border-bottom: solid 1px var(--border-color);
+    padding-bottom: 20px;
+}
+
+.box-comment__avatar-text {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 16px;
+    line-height: 72px;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    background-color: #e3e7ef;
+    float: left;
+}
+
+.box-comment__main p{
+    margin: 0;
+}
+
+.box-comment__user-name {
+    margin: 0 0 10px 0;
+}
