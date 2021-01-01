@@ -30,6 +30,12 @@ Route::get('/product/1', function () {
     ]);
 });
 
+Route::get('/search', function () {
+    return view('pages.common.search', [
+        'you' => Auth::user(),
+    ]);
+});
+
 Route::prefix('user')->middleware('auth')->name('user.')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/favourites', [UserController::class, 'getFavourites'])->name('favourites.index');

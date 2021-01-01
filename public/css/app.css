@@ -555,3 +555,127 @@
 .box-comment__user-name {
     margin: 0 0 10px 0;
 }
+
+/* cart page */
+.cart__header {
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.cart__header-count {
+    text-transform: lowercase;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.cart_list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cart_list-item {
+    padding: 20px;
+    display: flex;
+}
+
+.cart-item__img {
+    width: 130px;
+    padding-top: 25%;
+    margin-right: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top center;
+}
+
+.cart-item__content {
+    flex: 1;
+    display: flex;
+}
+
+.cart-item__desc {
+    flex: 1;
+}
+
+.cart-item__product-name{
+    margin-bottom: 10px;
+}
+
+.cart-item__product-name a{
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    
+}
+
+.cart-item__product-name a:hover{
+    color: rgb(13, 92, 182);
+}
+
+.cart-item__actions a{
+    color: rgb(10, 75, 145);
+}
+
+.cart-item__details{
+    display: flex;
+}
+.cart-item__price {
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 20px;
+}
+.cart-item__quantity--inner{
+    border: solid 1px var(--border-color);
+    border-radius: 2px;
+    height: 34px;
+}
+.cart-item__quantity input {
+    max-width: 40px;
+    height: 100%;
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    text-align: center;
+}
+.cart-item__quantity-descrease, .cart-item__quantity-increase{
+    display: inline-block;
+    cursor: pointer;
+    padding: 0 10px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.cart__address-heading, .cart__total-text {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.cart__address-title {
+    margin: 0;
+    line-height: 100%;
+    font-size: 16px;
+}
+
+.cart__address-name {
+    margin-right: 10px;
+}
+
+.cart__address-name::after {
+    content: "";
+    width: 1px;
+    height: 15px;
+    background: rgb(224, 224, 224);
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+}
+
+.cart__total-value {
+    display: block;
+    font-size: 24px;
+}
+
+.cart__submit{
+    margin: 20px 0;
+}
