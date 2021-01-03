@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -47,8 +48,17 @@ Route::prefix('user')->middleware('auth')->name('user.')->group(function(){
 
 //Admin routes
 Route::prefix('admin')->middleware(['auth', 'verified', 'can:is-admin'])->name('admin.')->group(function() {
+    //user routes
     Route::get('/users/search', [AdminUserController::class, 'search'])->name('users.search');
     Route::resource('/users', AdminUserController::class);
+
+    //product routes
     Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
     Route::resource('/products', ProductController::class);
+
+    //order routes
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('/orders/search', [OrderController::class, 'search'])->name('orders.search');
+    Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
 });
