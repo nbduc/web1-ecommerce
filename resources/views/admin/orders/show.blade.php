@@ -5,24 +5,6 @@
 @endsection
 
 @section('content')
-<!-- Position it -->
-<div style="position: absolute; top: 0; right: 0;">
-
-    <!-- Then put toasts within -->
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <img src="..." class="rounded mr-2" alt="...">
-            <strong class="mr-auto">Bootstrap</strong>
-            <small class="text-muted">just now</small>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            See? Just like this.
-        </div>
-    </div>
-</div>
 <div class="row">
     <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
         <div class="card">
@@ -65,7 +47,7 @@
                         </div>
                     @endforeach
                     <br>
-                    <button type="submit" class="btn btn-primary" onclick="updateStatus(event, this);">Change</button>
+                    <button type="submit" class="btn btn-primary">Change</button>
                 </form>
                 <hr>
 
@@ -95,51 +77,4 @@
     </div>
 </div>
 
-@endsection
-
-@section('js')
-<script>
-    function updateStatus(event, button) {
-        event.preventDefault();
-        const form = button.parentElement;
-        let url = form.action;
-        let token = form.querySelector('input[name="_token"]').getAttribute('value');
-        let method = form.querySelector('input[name="_method"]').getAttribute('value');
-
-        let status;
-        let ele = form.getElementsByTagName('input');
-        for(i = 0; i < ele.length; i++) { 
-            if(ele[i].type === "radio"){
-                if(ele[i].checked) {
-                    status = ele[i].value;
-                }
-            }
-        } 
-        console.log(url, token, status);
-
-        fetch(url, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json, text-plain, */*",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-TOKEN": token
-                    },
-                method: 'post',
-                credentials: "same-origin",
-                body: JSON.stringify({
-                    status_id: status,
-                    _method: method
-                }),
-            }
-        ).then((response) => {
-            response.json()
-            .then(messages => {
-                console.log(messages);
-                $('.toast').toast('show');
-            })
-        }).catch(function(error) {
-            console.log(error);
-        });
-    }
-</script>
 @endsection

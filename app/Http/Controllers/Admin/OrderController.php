@@ -70,24 +70,21 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         if(!$order){
-            return response()->json([
-                'error' => 'Cannot find the order.',
-            ]);
+            $request->session()->flash('error', "Cannot find the order.");
+            return redirect(route('admin.orders.show', $id));
+        } else {
+            $status = OrderStatus::find($request->status);
+            if(!$status){
+                $request->session()->flash('error', "Cannot update.");
+                return redirect(route('admin.orders.show', $id));
+            } else {
+                $order->status_id = $status->id;
+                $order->save();
+
+                $request->session()->flash('success', "Updated successfully.");
+
+                return redirect(route('admin.orders.show', $id));
+            }
         }
-
-        $status = OrderStatus::find($request->status_id);
-
-        if(!$status){
-            return response()->json([
-                'error' => 'Cannot update.',
-            ]);
-        }
-
-        $order->status_id = $status->id;
-        $order->save();
-        
-        return response()->json([
-            'success' => 'Updated successfully.',
-        ]);
     }
 }
