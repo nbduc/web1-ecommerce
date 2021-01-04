@@ -16,11 +16,11 @@ class OrderStatusSeeder extends Seeder
     {
         //
         DB::table('order_statuses')->insert([
-            ['name' => 'Pending', 'created_at' => now(), 'updated_at' => now()], 
-            ['name' => 'Cancelled', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Awaiting Fulfillment', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Awaiting Shipment', 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Completed', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Pending', 'class' => 'badge badge-primary', 'created_at' => now(), 'updated_at' => now()], 
+            ['name' => 'Cancelled', 'class' => 'badge badge-danger', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Awaiting Fulfillment', 'class' => 'badge badge-info', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Awaiting Shipment', 'class' => 'badge badge-warning', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'Completed', 'class' => 'badge badge-success', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }

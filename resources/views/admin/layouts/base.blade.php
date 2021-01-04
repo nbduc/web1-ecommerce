@@ -23,7 +23,7 @@
         @include('admin.includes.header')
         <div class="c-body">
             <main class="c-main">
-                <div class="container-fluid">
+                <div class="container-fluid" style="position: relative;">
                     @include('admin.includes.alert')
                     @yield('content')
                 </div>

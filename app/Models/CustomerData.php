@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class CustomerData extends Model
 {
     use HasFactory;
-
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -16,20 +16,14 @@ class Order extends Model
      */
     protected $fillable = [
         'user_id',
-        'ship_date',
+        'phone',
         'ship_address',
-        'status_id',
     ];
+
+    protected $table = 'customer_data';
 
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-    public function orderDetails() {
-        return $this->hasMany(OrderDetail::class);
-    }
-
-    public function status(){
-        return $this->belongsTo(OrderStatus::class, 'status_id');
-    }
 }

@@ -58,7 +58,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'can:is-admin'])->name('
 
     //order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
     Route::get('/orders/search', [OrderController::class, 'search'])->name('orders.search');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
     Route::patch('/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('orders.update-status');
 });

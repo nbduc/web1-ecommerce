@@ -47,6 +47,13 @@
                                                 Product management
                                             </a>
                                         </li>
+                                        <li class="header__profile-item">
+                                            <a href="{{ route('admin.orders.index') }}">
+                                                <i class="fas fa-users"></i>
+                                                <span class="header__text--spacer"></span>
+                                                Order management
+                                            </a>
+                                        </li>
                                         @endcan
                                     </ul>
                                 </span>
