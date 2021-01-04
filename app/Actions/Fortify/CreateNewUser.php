@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -39,9 +40,13 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
         ]);
 
+        //register role
         $role = Role::select('id')->where('name', 'Customer')->first();
-
         $user->roles()->attach($role);
+
+        //add a new cart to the user
+        $cart = new Cart();
+        $user->cart()->save($cart);
 
         return $user;
     }
