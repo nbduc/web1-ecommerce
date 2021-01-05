@@ -39,6 +39,14 @@
                         </a>
                     </li>
                 </ul>
+                <hr>
+                <div class="cart-item__quantity">
+                    <div class="cart-item__quantity--inner">
+                        <div class="cart-item__quantity-descrease cart-item__quantity-disable" onclick="descreaseQuantity();">-</div>
+                        <input type="tel" name="quantity" value="1">
+                        <div class="cart-item__quantity-increase" onclick="increaseQuantity();">+</div>
+                    </div>
+                </div>
                 <form action="#" method="POST" class="product_payment-form" enctype="multipart/form-data">
                     <div class="product_payment-buttons">
                         <button type="submit" class="btn btn-primary" onclick="addToCart(event);">
@@ -102,7 +110,7 @@
 </script>
 <script>
     function addToFavourites(e) {
-        postData('/user/favourites', { productId: 1 })
+        postData('{{ route('user.favourites.store') }}', { productId: 1 })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {
                 toast({
@@ -117,7 +125,9 @@
 <script>
     function addToCart(e) {
         e.preventDefault();
-        postData('{{ route('user.cart.store') }}', { productId: 1 })
+        const quantityInput = document.querySelector('input[name="quantity"]');
+        const quantity = parseInt(quantityInput.getAttribute('value'));
+        postData('{{ route('user.cart.update') }}', { productId: 1, quantity })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {
                 toast({
@@ -127,6 +137,23 @@
                 });
             });
         });
+    }
+</script>
+<script>
+    function increaseQuantity(){
+        let quantityInput = document.querySelector('input[name="quantity"]');
+        let currentQuantity = parseInt(quantityInput.getAttribute('value'));
+        currentQuantity++;
+        quantityInput.setAttribute('value', currentQuantity);
+    }
+    function descreaseQuantity(min = 1){
+        let quantityInput = document.querySelector('input[name="quantity"]');
+        let currentQuantity = parseInt(quantityInput.getAttribute('value'));
+        currentQuantity--;
+        if(currentQuantity < min){
+            currentQuantity = min;
+        }
+        quantityInput.setAttribute('value', currentQuantity);
     }
 </script>
 @endsection

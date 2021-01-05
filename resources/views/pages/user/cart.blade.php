@@ -8,7 +8,7 @@ Cart | {{ config('app.name') }}
 <div class="container">
     <h2 class="cart__header">
         <span>Shopping cart</span>
-        <span class="cart__header-count">1 product</span>
+        <span class="cart__header-count">{{ $cart->totalQuantity }} product</span>
     </h2>
     <hr>
     <div class="row">
@@ -28,13 +28,13 @@ Cart | {{ config('app.name') }}
                         </div>
                         <div class="cart-item__details">
                             <div class="cart-item__price">
-                                113.000đ
+                                {{ $cart->totalPrice }}đ
                             </div>
                             <div class="cart-item__quantity">
                                 <div class="cart-item__quantity--inner">
-                                    <div class="cart-item__quantity-descrease cart-item__quantity-disable">-</div>
-                                    <input type="tel" name="quantity" value="1">
-                                    <div class="cart-item__quantity-increase">+</div>
+                                    <div class="cart-item__quantity-descrease" onclick="descreaseQuantity();">-</div>
+                                    <input type="number" name="quantity" value="1" onchange="updateQuantity();">
+                                    <div class="cart-item__quantity-increase" onclick="increaseQuantity();">+</div>
                                 </div>
                             </div>
                         </div>
@@ -54,10 +54,50 @@ Cart | {{ config('app.name') }}
             <hr>
             <div class="cart__total">
                 <span class="cart__total-text">Total</span>
-                <span class="cart__total-value">113.000đ</span>
+                <span class="cart__total-value">{{ $cart->totalPrice }}đ</span>
             </div>
             <button type="button" class="btn btn-primary cart__submit">Checkout</button>
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    function descreaseQuantity(min = 1){
+        let quantityInput = document.querySelector('input[name="quantity"]');
+        let quantity = parseInt(quantityInput.getAttribute('value'));
+        quantity--;
+        if(quantity < min){
+            quantity = min;
+        }
+        quantityInput.setAttribute('value', quantity);
+
+        postData('{{ route('user.cart.update') }}', { productId: 1, descrement: 1 })
+        .then(messages => {
+            console.log(messages);
+        });
+    }
+    function increaseQuantity(){
+        let quantityInput = document.querySelector('input[name="quantity"]');
+        let quantity = parseInt(quantityInput.getAttribute('value'));
+        quantity++;
+        quantityInput.setAttribute('value', quantity);
+
+        postData('{{ route('user.cart.update') }}', { productId: 1, increment: 1 })
+        .then(messages => {
+            console.log(messages);
+        });
+    }
+    function updateQuantity(){
+        let quantityInput = document.querySelector('input[name="quantity"]');
+        let quantity = parseInt(quantityInput.getAttribute('value'));
+        console.log(quantity);
+
+        postData('{{ route('user.cart.update') }}', { productId: 1, updatedQuantity: quantity })
+        .then(messages => {
+            console.log(messages);
+        });
+    }
+</script>
 @endsection

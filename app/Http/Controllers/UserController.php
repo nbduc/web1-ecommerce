@@ -7,7 +7,6 @@ use App\Models\CartItem;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -44,37 +43,57 @@ class UserController extends Controller
     }
 
     public function getCart(){
+        $cart = Auth::user()->cart;
+        foreach($cart->cartItems as $cartItem){
+            $cart->totalPrice += $cartItem->quantity * $cartItem->unit_price;
+            $cart->totalQuantity += $cartItem->quantity;
+        }
+
         return view('pages.user.cart',[
             'you' => Auth::user(),
+            'cart' => $cart,
         ]);
     }
 
-    public function addProductToCart(Request $request){
+    public function updateCart(Request $request){
         //Check product existed.
 
         //Faked product to test.
         $product = ['id' => 1,'name' => 'Samsung Galaxy S21 Ultra', 'price' => 32000000];
 
         $cart = Auth::user()->cart;
+        $input = $request->all();
 
         //check product in cart
         if($cart->cartItems()->pluck('product_id')->contains($product['id'])){
             foreach($cart->cartItems as $cartItem){
                 if($cartItem->product_id == $product['id']){
-                    $cartItem->quantity++;
+                    if(array_key_exists('increment', $input)){
+                        $cartItem->quantity += $input['increment'];
+                    }else if(array_key_exists('descrement', $input)){
+                        $cartItem->quantity -= $input['descrement'];
+                        $cartItem->quantity < 1 ? 1 : $cartItem->quantity;
+                    } else if(array_key_exists('quantity', $input)){
+                        $cartItem->quantity += $input['quantity'];
+                    } else if(array_key_exists('updatedQuantity', $input)){
+                        $cartItem->quantity = $input['updatedQuantity'];
+                        $cartItem->quantity < 1 ? 1 : $cartItem->quantity;
+                    } else {
+                        $cartItem->quantity++;
+                    }
                     $cartItem->save();
-                    return response()->json([
-                        'success' => 'Added to your cart',
-                    ]);
                 }
             }
-            return response()->json([
-                'error' => 'Something went wrong',
-            ]);
         } else {
+            $quantity = 0;
+            if(array_key_exists('quantity', $input)){
+                $quantity = $input['quantity'] < 1 ? $input['quantity'] : 1;
+            } else {
+                $quantity = 1;
+            }
             $newCartItem = new CartItem([
                 'product_id' => $product['id'],
-                'quantity' => 1,
+                'quantity' => $quantity,
                 'unit_price' => $product['price'],
             ]);
             $cart->cartItems()->save($newCartItem);

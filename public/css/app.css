@@ -630,6 +630,9 @@
     font-weight: 700;
     margin-right: 20px;
 }
+.cart-item__quantity{
+    display: inline-block;
+}
 .cart-item__quantity--inner{
     border: solid 1px var(--border-color);
     border-radius: 2px;
@@ -648,6 +651,7 @@
     padding: 0 10px;
     font-size: 18px;
     color: rgba(0, 0, 0, 0.4);
+    user-select: none;
 }
 
 .cart__address-heading, .cart__total-text {
