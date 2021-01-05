@@ -33,7 +33,7 @@
                 <ul class="product_meta">
                     <li class="product_price"><span>$18,55</span></li>
                     <li class="product_votes product_votes--voted">
-                        <a href="javascript:;" onclick="addToFavourites(this);">
+                        <a href="javascript:;" onclick="addToFavourites(event);">
                             <i class="fas fa-heart"></i>
                             <span>10</span>
                         </a>
@@ -41,7 +41,7 @@
                 </ul>
                 <form action="#" method="POST" class="product_payment-form" enctype="multipart/form-data">
                     <div class="product_payment-buttons">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" onclick="addToCart(event);">
                             <i class="fas fa-shopping-cart"></i>
                             Add to cart
                         </button>
@@ -101,16 +101,32 @@
     }
 </script>
 <script>
-    function addToFavourites(element) {
+    function addToFavourites(e) {
         postData('/user/favourites', { productId: 1 })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {
                 toast({
-                    title: 'Message from server',
+                    title: key,
                     message: messages[key],
                     type: key
                 });
             });
+        });
+    }
+</script>
+<script>
+    function addToCart(e) {
+        e.preventDefault();
+        postData('{{ route('user.cart.store') }}', { productId: 1 })
+        .then(messages => {
+            console.log(messages);
+            // Object.keys(messages).forEach(function (key) {
+            //     toast({
+            //         title: key,
+            //         message: messages[key],
+            //         type: key
+            //     });
+            // });
         });
     }
 </script>

@@ -37,11 +37,15 @@ Route::get('/search', function () {
     ]);
 });
 
-Route::prefix('user')->middleware('auth')->name('user.')->group(function(){
+Route::prefix('user')->middleware(['auth', 'verified', 'can:is-customer'])->name('user.')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('index');
+
+    //favourite
     Route::get('/favourites', [UserController::class, 'getFavourites'])->name('favourites.index');
     Route::post('/favourites', [UserController::class, 'addFavourite'])->name('favourites.store');
     Route::delete('/favourites', [UserController::class, 'removeFavourite'])->name('favourites.destroy');
+
+    //cart
     Route::get('/cart', [UserController::class, 'getCart'])->name('cart.index');
     Route::post('/cart', [UserController::class, 'addProductToCart'])->name('cart.store');
 });

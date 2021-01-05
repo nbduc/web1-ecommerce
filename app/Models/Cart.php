@@ -9,6 +9,9 @@ class Cart extends Model
 {
     use HasFactory;
 
+    public $totalQuantity = 0;
+    public $totalPrice = 0;
+
     /**
      * The attributes that are mass assignable.
      *
