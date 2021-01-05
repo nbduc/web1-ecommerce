@@ -64,14 +64,13 @@ class UserController extends Controller
                     $cartItem->quantity++;
                     $cartItem->save();
                     return response()->json([
-                        'success1' => 'Added to your cart',
+                        'success' => 'Added to your cart',
                     ]);
                 }
             }
             return response()->json([
                 'error' => 'Something went wrong',
             ]);
-            //return response()->json($cart->cartItems[0]->product_id == );
         } else {
             $newCartItem = new CartItem([
                 'product_id' => $product['id'],
@@ -80,7 +79,6 @@ class UserController extends Controller
             ]);
             $cart->cartItems()->save($newCartItem);
         }
-
 
         return response()->json([
             'success' => 'Added to your cart',

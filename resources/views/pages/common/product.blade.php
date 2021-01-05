@@ -119,14 +119,13 @@
         e.preventDefault();
         postData('{{ route('user.cart.store') }}', { productId: 1 })
         .then(messages => {
-            console.log(messages);
-            // Object.keys(messages).forEach(function (key) {
-            //     toast({
-            //         title: key,
-            //         message: messages[key],
-            //         type: key
-            //     });
-            // });
+            Object.keys(messages).forEach(function (key) {
+                toast({
+                    title: key,
+                    message: messages[key],
+                    type: key
+                });
+            });
         });
     }
 </script>
