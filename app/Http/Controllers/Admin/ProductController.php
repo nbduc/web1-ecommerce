@@ -26,7 +26,6 @@ class ProductController extends Controller
             'products' => $products,
             'you' => Auth::user()
         ]); 
-        
 
     }
 
