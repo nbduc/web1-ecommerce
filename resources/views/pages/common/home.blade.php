@@ -13,11 +13,12 @@
     <div id="toast"></div>
     <section class="main__carousel">
         <div class="carousel" data-flickity='{ "autoPlay": true }'>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
-            <div class="carousel-cell"></div>
+            <div class="carousel-cell">
+                <img class="carousel-cell-image" src="{{ url('images/Note-20-banner.jpg') }}" alt="note20-banner">
+            </div>
+            <div class="carousel-cell">
+                <img class="carousel-cell-image" src="{{ url('images/iphone12-banner.jpg') }}" alt="iphone12-banner">
+            </div>
         </div>
     </section>
     <section class="main__new-products product-list">
@@ -160,6 +161,22 @@
                         </div>
                     </a>
                 </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="product-list__header">
+            <h2 class="product-list__header-left">Top-selling products</h2>
+            <div class="product-list__header-right">
+                <a href="#">More products ›</a>
+            </div>
+        </div>
+
+        <hr>
+        <div class="product-list__header">
+            <h2 class="product-list__header-left">Most popular products</h2>
+            <div class="product-list__header-right">
+                <a href="#">More products ›</a>
             </div>
         </div>
     </section>

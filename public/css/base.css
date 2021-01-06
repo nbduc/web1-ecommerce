@@ -195,21 +195,18 @@
 }
 
 .carousel-cell {
-    width: 66%;
-    height: 200px;
+    width: 100%;
+    height: 280px;
     margin-right: 10px;
-    background: #528EC1;
-    border-radius: 5px;
-    counter-increment: gallery-cell;
+    background: transparent;
 }
 
-.carousel-cell:before {
+.carousel-cell-image {
     display: block;
-    text-align: center;
-    content: counter(gallery-cell);
-    line-height: 200px;
-    font-size: 80px;
-    color: white;
+    max-height: 100%;
+    margin: 0 auto;
+    max-width: 100%;
+    border-radius: 5px;
 }
 
 /* toast message */

@@ -9,9 +9,6 @@ class Cart extends Model
 {
     use HasFactory;
 
-    public $totalQuantity = 0;
-    public $totalPrice = 0;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -27,5 +24,15 @@ class Cart extends Model
 
     public function cartItems(){
         return $this->hasMany(CartItem::class);
+    }
+
+    public function totalQuantity(){
+        return $this->cartItems->sum('quantity');
+    }
+
+    public function totalPrice(){
+        return $this->cartItems->sum(function($cartItem){
+            return $cartItem->quantity * $cartItem->unit_price;
+        });
     }
 }

@@ -24,7 +24,6 @@ class OrderController extends Controller
 
         return view('admin.orders.index', [
             'orders' => $orders,
-            'you' => Auth::user(),
         ]);
     }
 
@@ -41,7 +40,6 @@ class OrderController extends Controller
         return view('admin.orders.show', [
             'order' => $order,
             'statuses' => $statuses,
-            'you' => Auth::user()
         ]);
     }
 
@@ -54,7 +52,6 @@ class OrderController extends Controller
         })->paginate(10);
         return view('admin.orders.index', [
             'orders' => $orders,
-            'you' => Auth::user(),
         ]);
     }
 

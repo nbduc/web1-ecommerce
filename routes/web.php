@@ -20,21 +20,15 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('pages.common.home', [
-        'you' => Auth::user(),
-    ]);
+    return view('pages.common.home');
 });
 
 Route::get('/product/1', function () {
-    return view('pages.common.product', [
-        'you' => Auth::user(),
-    ]);
+    return view('pages.common.product');
 });
 
 Route::get('/search', function () {
-    return view('pages.common.search', [
-        'you' => Auth::user(),
-    ]);
+    return view('pages.common.search');
 });
 
 Route::prefix('user')->middleware(['auth', 'verified', 'can:is-customer'])->name('user.')->group(function(){
@@ -47,7 +41,7 @@ Route::prefix('user')->middleware(['auth', 'verified', 'can:is-customer'])->name
 
     //cart
     Route::get('/cart', [UserController::class, 'getCart'])->name('cart.index');
-    Route::post('/cart', [UserController::class, 'addProductToCart'])->name('cart.store');
+    Route::post('/cart', [UserController::class, 'updateCart'])->name('cart.update');
 });
 
 //Admin routes

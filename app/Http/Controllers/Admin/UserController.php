@@ -23,7 +23,6 @@ class UserController extends Controller
 
         return view('admin.users.index', [
             'users' => $users,
-            'you' => Auth::user()
         ]);
     }
 
@@ -36,7 +35,6 @@ class UserController extends Controller
     {
         return view('admin.users.create', [
             'roles' => Role::all(),
-            'you' => Auth::user()
             ]);
     }
 
@@ -67,7 +65,6 @@ class UserController extends Controller
             ->paginate(5);
         return view('admin.users.index', [
             'users' => $users,
-            'you' => Auth::user(),
             ]);
     }
 
@@ -81,7 +78,6 @@ class UserController extends Controller
     {
         return view('admin.users.show', [
             'user' => User::find($id),
-            'you' => Auth::user()
         ]);
     }
 
@@ -96,7 +92,6 @@ class UserController extends Controller
         return view('admin.users.edit', [
             'roles' => Role::all(),
             'user' => User::find($id),
-            'you' => Auth::user()
             ]
         );
     }
