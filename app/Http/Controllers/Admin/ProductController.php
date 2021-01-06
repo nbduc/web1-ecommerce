@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use Illuminate\Http\Request;
-// use App\Models\Product;
+use App\Models\Product;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -19,13 +19,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-        // $products = Product::paginate(15);
-
+        
+        $products = Product::paginate(15);
+        
         return view('admin.products.index', [
-            // 'products' => $products,
+            'products' => $products,
             'you' => Auth::user()
-        ]);
+        ]); 
+        
+
     }
 
     /**
