@@ -11,6 +11,10 @@ Cart | {{ config('app.name') }}
         <span class="cart__header-count">{{ $cart->totalQuantity }} product</span>
     </h2>
     <hr>
+    @if($cart->totalQuantity <= 0)
+    <img class="cart_empty-img" src="{{ url('images/empty-cart.png') }}" alt="empty-cart">
+    <p class="cart_empty-message">Your cart is currently empty!</p>
+    @else
     <div class="row">
         <div class="col-md-8">
             <ul class="cart_list">
@@ -59,6 +63,7 @@ Cart | {{ config('app.name') }}
             <button type="button" class="btn btn-primary cart__submit">Checkout</button>
         </div>
     </div>
+    @endif
 </div>
 @endsection
 
