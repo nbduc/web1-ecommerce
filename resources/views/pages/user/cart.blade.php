@@ -8,12 +8,19 @@ Cart | {{ config('app.name') }}
 <div class="container">
     <h2 class="cart__header">
         <span>Shopping cart</span>
-        <span class="cart__header-count">{{ $cart->totalQuantity }} product</span>
+        <span class="cart__header-count">{{ $cart->totalQuantity() }} product</span>
     </h2>
     <hr>
-    @if($cart->totalQuantity <= 0)
+    @if($cart->totalQuantity() <= 0)
     <img class="cart_empty-img" src="{{ url('images/empty-cart.png') }}" alt="empty-cart">
-    <p class="cart_empty-message">Your cart is currently empty!</p>
+    <p class="cart_empty-message">
+        Your cart is currently empty :((
+        <small style="display: block">
+            Looks like you have no items in your shopping cart.
+            Click <a href="{{ url('/') }}">here</a> to return to shop.
+        </small>
+    </p>
+    
     @else
     <div class="row">
         <div class="col-md-8">
@@ -32,7 +39,7 @@ Cart | {{ config('app.name') }}
                         </div>
                         <div class="cart-item__details">
                             <div class="cart-item__price">
-                                {{ $cart->totalPrice }}đ
+                                {{ $cart->totalPrice() }}đ
                             </div>
                             <div class="cart-item__quantity">
                                 <div class="cart-item__quantity--inner">
@@ -58,7 +65,7 @@ Cart | {{ config('app.name') }}
             <hr>
             <div class="cart__total">
                 <span class="cart__total-text">Total</span>
-                <span class="cart__total-value">{{ $cart->totalPrice }}đ</span>
+                <span class="cart__total-value">{{ $cart->totalPrice() }}đ</span>
             </div>
             <button type="button" class="btn btn-primary cart__submit">Checkout</button>
         </div>

@@ -24,7 +24,6 @@ class ProductController extends Controller
 
         return view('admin.products.index', [
             // 'products' => $products,
-            'you' => Auth::user()
         ]);
     }
 
@@ -36,9 +35,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('admin.products.create', [
-            'you' => Auth::user()
-        ]);
+        return view('admin.products.create');
     }
 
     /**
@@ -59,7 +56,6 @@ class ProductController extends Controller
             // ->paginate(5);
         return view('admin.products.index', [
             // 'products' => $products,
-            'you' => Auth::user(),
         ]);
     }
 
@@ -85,7 +81,6 @@ class ProductController extends Controller
         //
         return view('admin.products.edit', [
             // 'product' => Product::find($id),
-            'you' => Auth::user()
             ]
         );
     }

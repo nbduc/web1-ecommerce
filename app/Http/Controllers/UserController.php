@@ -18,13 +18,11 @@ class UserController extends Controller
     public function index()
     {
         return view('pages.user.profile',[
-            'you' => Auth::user(),
         ]);
     }
 
     public function getFavourites(){
         return view('pages.user.favourites',[
-            'you' => Auth::user(),
         ]);
     }
 
@@ -44,13 +42,8 @@ class UserController extends Controller
 
     public function getCart(){
         $cart = Auth::user()->cart;
-        foreach($cart->cartItems as $cartItem){
-            $cart->totalPrice += $cartItem->quantity * $cartItem->unit_price;
-            $cart->totalQuantity += $cartItem->quantity;
-        }
 
         return view('pages.user.cart',[
-            'you' => Auth::user(),
             'cart' => $cart,
         ]);
     }
@@ -98,6 +91,8 @@ class UserController extends Controller
             ]);
             $cart->cartItems()->save($newCartItem);
         }
+
+        session(['totalQuantity' => $cart->totalQuantity()]);
 
         return response()->json([
             'success' => 'Added to your cart',

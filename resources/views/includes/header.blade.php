@@ -79,7 +79,9 @@
                         <a href="{{ route('user.cart.index') }}" class="header__cart-btn header-btn">
                             <i class="fas fa-shopping-cart"></i>
                             Cart 
-                            <span class="header__cart-count">0</span>
+                            @if(Session::has('totalQuantity'))
+                            <span class="header__cart-count">{{ Session::get('totalQuantity')}}</span>
+                            @endif
                         </a>
 
                         <a href="{{ route('user.favourites.index') }}" class="header__votes-btn header-btn">
