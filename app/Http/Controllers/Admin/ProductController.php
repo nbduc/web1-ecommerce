@@ -23,16 +23,11 @@ class ProductController extends Controller
         $products = Product::paginate(15);
         
         return view('admin.products.index', [
-<<<<<<< HEAD
             'products' => $products,
             'you' => Auth::user()
         ]); 
         
 
-=======
-            // 'products' => $products,
-        ]);
->>>>>>> 443d3ecea1e792ea94fe51e80d34cce24ee88f89
     }
 
     /**
