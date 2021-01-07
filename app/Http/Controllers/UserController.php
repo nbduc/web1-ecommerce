@@ -57,12 +57,16 @@ class UserController extends Controller
                         $cartItem->quantity += $input['increment'];
                     }else if(array_key_exists('descrement', $input)){
                         $cartItem->quantity -= $input['descrement'];
-                        $cartItem->quantity < 1 ? 1 : $cartItem->quantity;
+                        if($cartItem->quantity < 1){
+                            $cartItem->quantity = 1; 
+                        }
                     } else if(array_key_exists('quantity', $input)){
                         $cartItem->quantity += $input['quantity'];
                     } else if(array_key_exists('updatedQuantity', $input)){
                         $cartItem->quantity = $input['updatedQuantity'];
-                        $cartItem->quantity < 1 ? 1 : $cartItem->quantity;
+                        if($cartItem->quantity < 1){
+                            $cartItem->quantity = 1; 
+                        }
                     } else {
                         $cartItem->quantity++;
                     }
@@ -87,7 +91,13 @@ class UserController extends Controller
         session(['totalQuantity' => $cart->totalQuantity()]);
 
         return response()->json([
-            'success' => 'Added to your cart',
+            'success' => 'Upadted successfully.',
+        ]);
+    }
+
+    public function removeFromCart(Request $request){
+        return response()->json([
+            'success' => 'Removed from your cart.'
         ]);
     }
 

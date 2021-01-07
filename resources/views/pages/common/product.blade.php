@@ -33,11 +33,11 @@
                 <ul class="product_meta">
                     <li class="product_price"><span>$18,55</span></li>
                     <li class="product_votes product_votes--voted">
-                        <a href="javascript:;" onclick="addToFavourites(event);" class="product_votes-add-link">
+                        <a href="javascript:;" onclick="addToFavourites(event);" class="product_votes-add-link" title="Add to my favourites">
                             <i class="far fa-heart"></i>
                             <span>10</span>
                         </a>
-                        <a href="javascript:;" onclick="removeFromFavourites(event);" class="product_votes-remove-link">
+                        <a href="javascript:;" onclick="removeFromFavourites(event);" class="product_votes-remove-link" title="Remove from my favourites">
                             <i class="fas fa-heart"></i>
                             <span>10</span>
                         </a>

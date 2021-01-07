@@ -579,13 +579,24 @@
     font-weight: 300;
 }
 
-.cart_list {
+.cart__empty{
+    display: none;
+}
+
+.cart--empty .cart__main{
+    display: none;
+}
+.cart--empty .cart__empty{
+    display: block;
+}
+
+.cart__list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.cart_list-item {
+.cart__list-item {
     padding: 20px;
     display: flex;
 }
@@ -699,13 +710,13 @@
     margin: 20px 0;
 }
 
-.cart_empty-img{
+.cart__empty-img{
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
-.cart_empty-message{
+.cart__empty-message{
     text-align: center;
     font-size: 20px;
     color: var(--text-color);

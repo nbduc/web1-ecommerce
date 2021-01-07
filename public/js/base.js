@@ -59,3 +59,24 @@ async function postData(url = '', data = {}) {
     }
     return response.json(); // parses JSON response into native JavaScript objects
 }
+
+//get parent element
+function getParent(element, selector) {
+    while(element.parentElement){
+        if (element.parentElement.matches(selector)){
+            return element.parentElement;
+        }
+        element = element.parentElement;
+    }
+}
+
+//update cart item count
+function updateCart(options){
+    const {diff, quantity} = options
+    let cartCountElement = document.querySelector('.header__cart-count');
+    if(diff === 0){
+        cartCountElement.innerHTML = quantity;
+    } else {
+        cartCountElement.innerHTML = parseInt(cartCountElement.innerHTML) + diff;
+    }
+}
