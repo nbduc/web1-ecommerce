@@ -55,12 +55,24 @@ Cart | {{ config('app.name') }}
         </div>
         <div class="col-md-4">
             <div class="cart__address">
-                <p class="cart__address-heading">Shipping address</p>
-                <p class="cart__address-title">
-                    <b class="cart__address-name">Peter Powell</b>
-                    <b class="cart__address-phone">015-293847</b>
+                <p class="cart__address-heading">
+                    Shipping address
+                    <a href="{{ route('user.profile.index') }}">Change</a>
                 </p>
-                <p class="cart__address-content">4545  Cambridge Drive, Phoenix, Arizona</p>
+                <p class="cart__address-title">
+                    <b class="cart__address-name">{{ $you->name }}</b>
+                </p>
+                <span class="cart__address-content">
+                    
+                    @isset($you->customerData)
+                    Phone: {{ $you->customerData->phone }}
+                    <br>
+                    Ship address: {{ $you->customerData->ship_address }}
+                    @else
+                    <small style="display: block;">You have not provided your shipping address and phone number!</small>
+                    Add phone and ship address <a href="{{ route('user.profile.index') }}">here</a>.
+                    @endisset
+                </span>
             </div>
             <hr>
             <div class="cart__total">

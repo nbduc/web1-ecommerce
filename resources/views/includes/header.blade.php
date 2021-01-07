@@ -17,7 +17,7 @@
                                     Hello, {{$you->name}}
                                     <ul class="header__profile-list">
                                         <li class="header__profile-item">
-                                            <a href="{{ route('user.index') }}">
+                                            <a href="{{ route('user.profile.index') }}">
                                                 <i class="far fa-user"></i>
                                                 <span class="header__text--spacer"></span>
                                                 Profile

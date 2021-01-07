@@ -3,24 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserProfileRequest;
 use App\Models\CartItem;
+use App\Models\CustomerData;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    /**
-     * Display the specified resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        return view('pages.user.profile',[
-        ]);
-    }
-
     public function getFavourites(){
         return view('pages.user.favourites',[
         ]);
@@ -97,5 +89,21 @@ class UserController extends Controller
         return response()->json([
             'success' => 'Added to your cart',
         ]);
+    }
+
+    public function getProfile(Request $request){
+        return view('pages.user.profile', [
+            'redirectTo' => str_replace(url('/'), '', url()->previous()),
+        ]);
+    }
+
+    public function updateProfile(UpdateUserProfileRequest $request){
+        $input = $request->validated();
+        $user = User::find(Auth::user()->id);
+
+        $user->update($request->only(['name', 'email']));
+        $user->customerData()->update($request->only(['phone', 'ship_address']));
+
+        return redirect($input['redirectTo']);
     }
 }

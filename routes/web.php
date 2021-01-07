@@ -42,6 +42,10 @@ Route::prefix('user')->middleware(['auth', 'verified', 'can:is-customer'])->name
     //cart
     Route::get('/cart', [UserController::class, 'getCart'])->name('cart.index');
     Route::post('/cart', [UserController::class, 'updateCart'])->name('cart.update');
+
+    //profile
+    Route::get('/profile', [UserController::class, 'getProfile'])->name('profile.index');
+    Route::post('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
 });
 
 //Admin routes

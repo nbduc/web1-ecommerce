@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\Cart;
+use App\Models\CustomerData;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +44,9 @@ class CreateNewUser implements CreatesNewUsers
         //register role
         $role = Role::select('id')->where('name', 'Customer')->first();
         $user->roles()->attach($role);
+
+        $customerData = new CustomerData();
+        $user->customerData()->save($customerData);
 
         //add a new cart to the user
         $cart = new Cart();

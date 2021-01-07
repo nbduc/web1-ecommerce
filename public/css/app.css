@@ -679,6 +679,11 @@
     margin-left: 10px;
 }
 
+.cart__address-content{
+    margin-top: 12px;
+    display: block;
+}
+
 .cart__total-value {
     display: block;
     font-size: 24px;
@@ -745,4 +750,15 @@
     padding: 0 15px;
     background-color: transparent;
     border: 0;
+}
+
+.profile-form{
+    width: 40%;
+    margin: 20px 0;
+}
+
+.profile__heading{
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 600;
 }
