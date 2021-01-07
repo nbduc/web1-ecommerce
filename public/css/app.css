@@ -470,10 +470,16 @@
     color: #585858;
 }
 .product_votes i {
-
-}
-.product_votes.product_votes--voted i{
     color: #DD2525;
+}
+.product_votes-remove-link{
+    display: none;
+}
+.product_votes--voted .product_votes-add-link{
+    display: none;
+}
+.product_votes--voted .product_votes-remove-link{
+    display: block;
 }
 
 .product_payment-form {

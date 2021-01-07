@@ -33,7 +33,11 @@
                 <ul class="product_meta">
                     <li class="product_price"><span>$18,55</span></li>
                     <li class="product_votes product_votes--voted">
-                        <a href="javascript:;" onclick="addToFavourites(event);">
+                        <a href="javascript:;" onclick="addToFavourites(event);" class="product_votes-add-link">
+                            <i class="far fa-heart"></i>
+                            <span>10</span>
+                        </a>
+                        <a href="javascript:;" onclick="removeFromFavourites(event);" class="product_votes-remove-link">
                             <i class="fas fa-heart"></i>
                             <span>10</span>
                         </a>
@@ -119,6 +123,22 @@
                     type: key
                 });
             });
+            document.querySelector('.product_votes').classList.add('product_votes--voted');
+        });
+    }
+</script>
+<script>
+    function removeFromFavourites(e) {
+        postData('{{ route('user.favourites.destroy') }}', { productId: 1, _method: 'DELETE' })
+        .then(messages => {
+            Object.keys(messages).forEach(function (key) {
+                toast({
+                    title: key,
+                    message: messages[key],
+                    type: key
+                });
+            });
+            document.querySelector('.product_votes').classList.remove('product_votes--voted');
         });
     }
 </script>
