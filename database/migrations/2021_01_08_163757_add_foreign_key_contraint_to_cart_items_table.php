@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyContraintToProductImagesTable extends Migration
+class AddForeignKeyContraintToCartItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,7 @@ class AddForeignKeyContraintToProductImagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('product_images', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('product_id')->change();
+        Schema::table('cart_items', function (Blueprint $table) {
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
@@ -27,10 +25,8 @@ class AddForeignKeyContraintToProductImagesTable extends Migration
      */
     public function down()
     {
-        Schema::table('product_images', function (Blueprint $table) {
+        Schema::table('cart_items', function (Blueprint $table) {
             //
-            // $table->integer('product_id')->change();
-            // $table->dropForeign('product_images_product_id_foreign');
         });
     }
 }

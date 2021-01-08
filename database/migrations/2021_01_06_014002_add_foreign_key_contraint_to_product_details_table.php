@@ -29,8 +29,8 @@ class AddForeignKeyContraintToProductDetailsTable extends Migration
     {
         Schema::table('product_details', function (Blueprint $table) {
             //
-            $table->integer('product_id')->change();
-            $table->dropForeign('product_details_product_id_foreign');
+            // $table->integer('product_id')->change();
+            // $table->dropForeign('product_details_product_id_foreign');
         });
     }
 }
