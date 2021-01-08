@@ -51,7 +51,10 @@ Checkout | {{ config('app.name') }}
     </div>
     <hr>
     <div class="order__place-order">
-        <a type="button" class="btn btn-danger" style="width: 200px;" href="{{ route('user.order.store') }}">Place order</a>
+        <form action="{{ route('user.order.store') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger" style="width: 200px;">Place order</button>
+        </form>
         <p>(Please check your order before placing your order)</p>
     </div>
 </div>

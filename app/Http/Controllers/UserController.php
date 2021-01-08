@@ -6,6 +6,9 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
 use App\Models\CartItem;
 use App\Models\CustomerData;
+use App\Models\Order;
+use App\Models\OrderDetail;
+use App\Models\OrderStatus;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -127,12 +130,37 @@ class UserController extends Controller
 
     public function getOrder(Request $request){
         $cart = Auth::user()->cart;
+        if($cart->totalQuantity() <= 0){
+            return abort(404);
+        }
         return view('pages.user.order',[
             'cart' => $cart,
         ]);
     }
 
     public function postOrder(Request $request){
-        
+        //check cart
+        $user = User::find(Auth::user()->id);
+        $cart = $user->cart;
+
+        if($cart->totalQuantity() <= 0){
+            return response('error', 403);
+        }
+
+        //create new order
+        $pendingStatus = OrderStatus::select('id')->where('name', 'Pending')->first();
+        $order = new Order([
+            'ship_date' => date('Y-m-d H:i:s', strtotime('+3 days')),
+            'ship_address' => $user->customerData->ship_address,
+            'status_id' => $pendingStatus->id,
+        ]);
+        $user->orders()->save($order);
+        foreach($cart->cartItems as $item){
+            $orderDetail = new OrderDetail($item->only(['product_id', 'quantity', 'unit_price']));
+            $order->orderDetails()->save($orderDetail);
+            $item->delete();
+        }
+        session(['totalQuantity' => $cart->totalQuantity()]);
+        return view('pages.user.success-order');
     }
 }

@@ -826,3 +826,23 @@
     color: var(--danger-color);
     font-size: 28px;
 }
+
+.order__messages-wrapper{
+    margin: 70px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.order__messages {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.order__thank-you {
+    font-size: 24px;
+}
+
+.order__redirect-btn{
+    width: 300px;
+    margin-top: 20px;
+}

@@ -156,6 +156,7 @@
                     type: key
                 });
             });
+            updateCart({diff: quantity, quantity: 0});
         });
     }
 </script>

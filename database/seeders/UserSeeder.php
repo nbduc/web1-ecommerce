@@ -19,14 +19,12 @@ class UserSeeder extends Seeder
     {
         User::factory()->times(43)->create();
         //create admin
-        $roles = Role::all();
+        $role = Role::select('id')->where('name', 'Admin')->first();
         User::create([
             'name' => 'Admin', 
             'email' => 'admin@mail.test', 
             'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
-        ])->roles()->attach(
-            $roles->where('name', 'Admin')->pluck('id')
-        );
+        ])->roles()->attach($role);
     }
 }

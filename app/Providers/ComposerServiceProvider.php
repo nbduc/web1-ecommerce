@@ -32,6 +32,7 @@ class ComposerServiceProvider extends ServiceProvider
                 'pages.user.favourites',
                 'pages.user.profile',
                 'pages.user.order',
+                'pages.user.success-order',
                 'admin.orders.index',
                 'admin.orders.show',
                 'admin.product.create',
