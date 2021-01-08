@@ -165,6 +165,7 @@
         let currentQuantity = parseInt(quantityInput.getAttribute('value'));
         currentQuantity++;
         quantityInput.setAttribute('value', currentQuantity);
+        updateCart({diff: 1, quantity: 0});
     }
     function descreaseQuantity(min = 1){
         let quantityInput = document.querySelector('input[name="quantity"]');
@@ -174,6 +175,7 @@
             currentQuantity = min;
         }
         quantityInput.setAttribute('value', currentQuantity);
+        updateCart({diff: -1, quantity: 0});
     }
 </script>
 @endsection

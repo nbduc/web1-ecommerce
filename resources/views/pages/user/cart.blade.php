@@ -81,7 +81,7 @@ Cart | {{ config('app.name') }}
                     <span class="cart__total-text">Total</span>
                     <span class="cart__total-value">{{ $cart->totalPrice() }}đ</span>
                 </div>
-                <button type="button" class="btn btn-primary cart__submit">Checkout</button>
+                <a type="button" href="{{ route('user.order.index') }}" class="btn btn-primary cart__submit">Proceed to Checkout</a>
             </div>
         </div>
     </div>

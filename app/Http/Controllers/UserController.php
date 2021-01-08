@@ -49,30 +49,38 @@ class UserController extends Controller
         $cart = Auth::user()->cart;
         $input = $request->all();
 
+        $messages = [];
+
         //check product in cart
         if($cart->cartItems()->pluck('product_id')->contains($product['id'])){
             foreach($cart->cartItems as $cartItem){
                 if($cartItem->product_id == $product['id']){
                     if(array_key_exists('increment', $input)){
                         $cartItem->quantity += $input['increment'];
+                        $messages += ['success' => 'Updated successfully.'];
                     }else if(array_key_exists('descrement', $input)){
                         $cartItem->quantity -= $input['descrement'];
                         if($cartItem->quantity < 1){
                             $cartItem->quantity = 1; 
                         }
+                        $messages += ['success' => 'Updated successfully.'];
                     } else if(array_key_exists('quantity', $input)){
                         $cartItem->quantity += $input['quantity'];
+                        $messages += ['success' => 'Added to your cart.'];
                     } else if(array_key_exists('updatedQuantity', $input)){
                         $cartItem->quantity = $input['updatedQuantity'];
                         if($cartItem->quantity < 1){
                             $cartItem->quantity = 1; 
                         }
+                        $messages += ['success' => 'Updated successfully.'];
                     } else {
                         $cartItem->quantity++;
+                        $messages += ['success' => 'Updated successfully.'];
                     }
                     $cartItem->save();
                 }
             }
+            
         } else {
             $quantity = 0;
             if(array_key_exists('quantity', $input)){
@@ -86,13 +94,13 @@ class UserController extends Controller
                 'unit_price' => $product['price'],
             ]);
             $cart->cartItems()->save($newCartItem);
+
+            $messages += ['success' => 'Added to your cart.'];
         }
 
         session(['totalQuantity' => $cart->totalQuantity()]);
 
-        return response()->json([
-            'success' => 'Upadted successfully.',
-        ]);
+        return response()->json($messages);
     }
 
     public function removeFromCart(Request $request){
@@ -115,5 +123,16 @@ class UserController extends Controller
         $user->customerData()->update($request->only(['phone', 'ship_address']));
 
         return redirect($input['redirectTo']);
+    }
+
+    public function getOrder(Request $request){
+        $cart = Auth::user()->cart;
+        return view('pages.user.order',[
+            'cart' => $cart,
+        ]);
+    }
+
+    public function postOrder(Request $request){
+        
     }
 }

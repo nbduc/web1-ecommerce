@@ -47,6 +47,10 @@ Route::prefix('user')->middleware(['auth', 'verified', 'can:is-customer'])->name
     //profile
     Route::get('/profile', [UserController::class, 'getProfile'])->name('profile.index');
     Route::post('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
+
+    //order
+    Route::get('/order', [UserController::class, 'getOrder'])->name('order.index');
+    Route::post('/order', [UserController::class, 'postOrder'])->name('order.store');
 });
 
 //Admin routes
