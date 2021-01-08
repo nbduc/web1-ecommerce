@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -46,5 +47,29 @@ class Product extends Model
 
     public function productImages(){
         return $this->hasMany(ProductImages::class);
+    }
+
+    public static function newProducts(){
+        return Product::orderBy('created_at', 'desc')->take(10)->get();
+    }
+
+    public static function topSellingProducts(){
+        return Product::whereIn('id', 
+            OrderDetail::select('product_id', DB::raw('sum(quantity) as total_quantity'))
+            ->groupBy('product_id')
+            ->orderBy('total_quantity', 'desc')
+            ->take(10)
+            ->pluck('product_id')->toArray()
+        )->get();
+    }
+
+    public static function mostPopularProducts(){
+        return Product::whereIn('id', 
+            Favourite::select('product_id', DB::raw('count(*) as total'))
+            ->groupBy('product_id')
+            ->orderBy('total', 'desc')
+            ->take(10)
+            ->pluck('product_id')->toArray()
+        )->get();
     }
 }
