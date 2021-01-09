@@ -54,13 +54,25 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         $search = $request->get('search');
-        // $products = Product::where('name', 'like', '%' . $search . '%')
-            // ->paginate(5);
+        if($search!=""){
+            $products = Product::where(function ($query) use ($search){
+                $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('price', $search)
+                ->orWhere('description', 'like', '%'.$search.'%');
+            })
+            ->paginate(15);
+            $products->appends(['search' => $search]);
+        }
+        else{
+            $products = Product::paginate(15);
+        }
         return view('admin.products.index', [
-            // 'products' => $products,
+            'products' => $products,
+            'search' => $search,
+            'you' => Auth::user()
         ]);
+        
     }
-
     /**
      * Display the specified resource.
      *
@@ -69,7 +81,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-	
+        return view('admin.products.show', [
+            'products' => Product::find($id),
+        ]);
     }
 
     /**
