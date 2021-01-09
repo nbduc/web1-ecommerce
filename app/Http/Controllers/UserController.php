@@ -151,10 +151,16 @@ class UserController extends Controller
     }
 
     public function getOrder(Request $request){
+        $user = User::find(Auth::user()->id);
         $cart = Auth::user()->cart;
         if($cart->totalQuantity() <= 0){
             return abort(404);
         }
+
+        if($user->customerData->phone === null || $user->customerData->ship_address === null){
+            return redirect(route('user.profile.index'));
+        }
+
         return view('pages.user.order',[
             'cart' => $cart,
         ]);

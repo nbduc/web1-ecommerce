@@ -27,7 +27,7 @@ Cart | {{ config('app.name') }}
             <div class="col-md-8">
                 <ul class="cart__list">
                     @foreach ($cart->cartItems as $item)
-                    <li class="cart__list-item" id="{{ $item->product_id }}">
+                    <li class="cart__list-item" id="{{ $item->product_id }}" data-price="{{ $item->unit_price }}">
                         <div class="cart-item__img" 
                             style="background-image: url({{ $item->product->feature_img }})"></div>
                         <div class="cart-item__content">
@@ -80,7 +80,7 @@ Cart | {{ config('app.name') }}
                 <hr>
                 <div class="cart__total">
                     <span class="cart__total-text">Total</span>
-                    <span class="cart__total-value">{{ $cart->totalPrice() }}đ</span>
+                    <span class="cart__total-value">${{ $cart->totalPrice() }}</span>
                 </div>
                 <a type="button" href="{{ route('user.order.index') }}" class="btn btn-primary cart__submit">Proceed to Checkout</a>
             </div>
@@ -91,6 +91,18 @@ Cart | {{ config('app.name') }}
 
 @section('js')
 <script>
+    function updateTotalPrice(){
+        const items = document.querySelectorAll('.cart__list-item');
+        let total = 0;
+        items.forEach(item => {
+            const quantity = parseInt(item.querySelector('input[name="quantity"]').getAttribute('value'));
+            const unitPrice = parseFloat(item.dataset.price);
+            total += quantity*unitPrice;
+        });
+        const totalPriceElement = document.querySelector('.cart__total-value');
+        totalPriceElement.innerHTML = `$${total}`;
+
+    }
     function descreaseQuantity(element, min = 1){
         const productItem = getParent(element, '.cart__list-item');
         const productId = productItem.id;
@@ -104,8 +116,8 @@ Cart | {{ config('app.name') }}
 
         postData('{{ route('user.cart.update') }}', { productId, descrement: 1 })
         .then(messages => {
-            console.log(messages);
             updateCart({diff: -1, quantity: 0});
+            updateTotalPrice();
         });
     }
     function increaseQuantity(element){
@@ -118,8 +130,8 @@ Cart | {{ config('app.name') }}
 
         postData('{{ route('user.cart.update') }}', { productId, increment: 1 })
         .then(messages => {
-            console.log(messages);
             updateCart({diff: 1, quantity: 0});
+            updateTotalPrice();
         });
     }
     function updateQuantity(element){
@@ -127,12 +139,11 @@ Cart | {{ config('app.name') }}
         const productId = productItem.id;
         let quantityInput = productItem.querySelector('input[name="quantity"]');
         let quantity = parseInt(quantityInput.getAttribute('value'));
-        console.log(quantity);
 
         postData('{{ route('user.cart.update') }}', { productId, updatedQuantity: quantity })
         .then(messages => {
-            console.log(messages);
             updateCart({diff: 0, quantity: quantity});
+            updateTotalPrice();
         });
     }
 </script>
@@ -156,7 +167,7 @@ Cart | {{ config('app.name') }}
             if(itemCount === 0){
                 document.querySelector('.cart__wrapper').classList.add('cart--empty');
             }
-
+            updateTotalPrice();
         });
     }
 </script>

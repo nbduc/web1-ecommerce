@@ -35,7 +35,7 @@ Checkout | {{ config('app.name') }}
                 @foreach ($cart->cartItems as $item)
                 <li class="order__details-item">
                     <div class="order__details-item-name">Leica M (Typ 240) Edition "Leica 60"</div>
-                    <div class="order__details-item-price"><strong>{{ $item->quantity }}</strong> x {{ $item->unit_price }}đ</div>
+                    <div class="order__details-item-price"><strong>{{ $item->quantity }}</strong> x ${{ $item->unit_price }}</div>
                 </li>
                 @endforeach
                 
@@ -44,7 +44,7 @@ Checkout | {{ config('app.name') }}
             <h4>Order total</h4>
             <div class="order__total-price">
                 <span>Total:</span>
-                <span class="order__total-price-number">{{ $cart->totalPrice() }}đ</span>
+                <span class="order__total-price-number">${{ $cart->totalPrice() }}</span>
             </div>
             
         </div>
