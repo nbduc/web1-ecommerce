@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index(){
-        if(Auth::user() != null && Auth::user()->hasRole('Customer')){
+        $user = User::find(Auth::user()->id);
+        if($user != null && $user->hasRole('Customer')){
             $user = User::find(Auth::user()->id);
             $cart = $user->cart;
             session(['totalQuantity' => $cart->totalQuantity()]);

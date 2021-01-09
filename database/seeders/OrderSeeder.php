@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
@@ -16,8 +17,8 @@ class OrderSeeder extends Seeder
     public function run()
     {
         //
-        Order::factory()::times(25)->create()->each(function($order){
+        Order::factory()->times(25)->create()->each(function($order){
             OrderDetail::factory()->times(3)->create(['order_id' => $order->id]);
-        });;
+        });
     }
 }

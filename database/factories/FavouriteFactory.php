@@ -2,20 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
-use App\Models\OrderStatus;
+use App\Models\Favourite;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrderFactory extends Factory
+class FavouriteFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Order::class;
+    protected $model = Favourite::class;
 
     /**
      * Define the model's default state.
@@ -25,13 +24,10 @@ class OrderFactory extends Factory
     public function definition()
     {
         $users = User::pluck('id')->toArray();
-        $statuses = OrderStatus::pluck('id')->toArray();
+        $product = Product::pluck('id')->toArray();
         return [
-            //
             'user_id' => $this->faker->randomElement($users),
-            'ship_date' => $this->faker->dateTimeThisMonth($max = 'now'),
-            'ship_address' => $this->faker->address,
-            'status_id' => $this->faker->randomElement($statuses),
+            'product_id' => $this->faker->randomElement($product),
         ];
     }
 }
