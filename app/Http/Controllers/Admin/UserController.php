@@ -23,6 +23,7 @@ class UserController extends Controller
 
         return view('admin.users.index', [
             'users' => $users,
+            'you' => Auth::user() 
         ]);
     }
 
@@ -35,6 +36,7 @@ class UserController extends Controller
     {
         return view('admin.users.create', [
             'roles' => Role::all(),
+            'you' => Auth::user()
             ]);
     }
 

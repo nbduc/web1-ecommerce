@@ -14,8 +14,8 @@
                     {{ __('Create new product') }}
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.products.store') }}">
-                        @include('admin.products.includes.form', ['create' => true]);
+                    <form method="POST" action="{{ route('admin.products.store') }}" enctype="multipart/form-data">
+                        @include('admin.products.includes.form', ['create' => true])
                     </form>
                 </div>
             </div>

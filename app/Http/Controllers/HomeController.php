@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index(){
-        $user = User::find(Auth::user()->id);
-        $cart = $user->cart;
-        session(['totalQuantity' => $cart->totalQuantity()]);
+        if(Auth::user() != null && Auth::user()->hasRole('Customer')){
+            $user = User::find(Auth::user()->id);
+            $cart = $user->cart;
+            session(['totalQuantity' => $cart->totalQuantity()]);
+        }
 
         $newProducts = Product::newProducts();
         $topSellingProducts = Product::topSellingProducts();

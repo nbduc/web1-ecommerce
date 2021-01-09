@@ -35,12 +35,10 @@ class ComposerServiceProvider extends ServiceProvider
                 'pages.user.success-order',
                 'admin.orders.index',
                 'admin.orders.show',
-                'admin.product.create',
-                'admin.product.index',
-                'admin.user.create',
-                'admin.user.edit',
-                'admin.user.index',
-                'admin.user.show',
+                'admin.users.create',
+                'admin.users.edit',
+                'admin.users.index',
+                'admin.users.show',
             ],
             'App\Http\ViewComposers\UserComposer'
         );

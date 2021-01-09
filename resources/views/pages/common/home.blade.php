@@ -31,12 +31,13 @@
         </div>
         <div class="product-list__main">
             <div class="row">
+                @foreach ($newProducts as $product)
                 <div class="col-md-2">
                     <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
+                        <div class="product-list-item__img" style="background-image: url({{ $product->feature_img }});"></div>
+                        <h4 class="product-list-item__name">{{ $product->name }}</h4>
                         <div class="product-list-item__price">
-                            <span>$18,55</span>
+                            <span>${{ $product->price }}</span>
                         </div>
                         <div class="product-list-item__votes">
                             <i class="product-list-item__vote-icon fas fa-heart"></i>
@@ -44,123 +45,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-2">
-                    <a href="#" class="product-list-item">
-                        <div class="product-list-item__img" style="background-image: url(https://muagame.vn/cdn1/images/201711/goods_img/playstation-4-slim-500gb---ps4-may-cu-gia-re-P275-1511160235282.jpg);"></div>
-                        <h4 class="product-list-item__name">Máy chơi game PlayStation 4 1TB Model 7128b - New Seal - Hàng chính hãng</h4>
-                        <div class="product-list-item__price">
-                            <span>$18,55</span>
-                        </div>
-                        <div class="product-list-item__votes">
-                            <i class="product-list-item__vote-icon fas fa-heart"></i>
-                            <span>10</span>
-                        </div>
-                    </a>
-                </div>
+                @endforeach
             </div>
         </div>
 
@@ -171,12 +56,50 @@
                 <a href="#">More products ›</a>
             </div>
         </div>
+        <div class="product-list__main">
+            <div class="row">
+                @foreach ($topSellingProducts as $product)
+                <div class="col-md-2">
+                    <a href="#" class="product-list-item">
+                        <div class="product-list-item__img" style="background-image: url({{ $product->feature_img }});"></div>
+                        <h4 class="product-list-item__name">{{ $product->name }}</h4>
+                        <div class="product-list-item__price">
+                            <span>${{ $product->price }}</span>
+                        </div>
+                        <div class="product-list-item__votes">
+                            <i class="product-list-item__vote-icon fas fa-heart"></i>
+                            <span>10</span>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
 
         <hr>
         <div class="product-list__header">
             <h2 class="product-list__header-left">Most popular products</h2>
             <div class="product-list__header-right">
                 <a href="#">More products ›</a>
+            </div>
+        </div>
+        <div class="product-list__main">
+            <div class="row">
+                @foreach ($mostPopularProducts as $product)
+                <div class="col-md-2">
+                    <a href="#" class="product-list-item">
+                        <div class="product-list-item__img" style="background-image: url({{ $product->feature_img }});"></div>
+                        <h4 class="product-list-item__name">{{ $product->name }}</h4>
+                        <div class="product-list-item__price">
+                            <span>${{ $product->price }}</span>
+                        </div>
+                        <div class="product-list-item__votes">
+                            <i class="product-list-item__vote-icon fas fa-heart"></i>
+                            <span>10</span>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
             </div>
         </div>
     </section>
