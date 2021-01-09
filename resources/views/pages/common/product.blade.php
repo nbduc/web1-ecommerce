@@ -14,32 +14,33 @@
     <nav class="breadcrumb" role="navigation">
         <a href="{{ url('/') }}" title="Back to the frontpage">Home</a>
         <span class="divider" aria-hidden="true">›</span>
-        <span class="breadcrumb--truncate">Leica M (Typ 240) Edition "Leica 60"</span>
+        <span class="breadcrumb--truncate">{{ $product->name }}</span>
     </nav>
     <div class="row">
         <div class="col-sm-5 product_images">
             <div class="product_images-wrapper"></div>
             <div class="product_images-thumb row">
                 {{-- product images here --}}
+                @foreach ($product->productImages as $image)
                 <div class="product_images-thumb-item col-sm-3"
-                    style="background-image: url(https://cdn.shopify.com/s/files/1/0543/1637/products/Leica_M_Edition_60_1_1024x1024@2x.jpg?v=1484764172)"></div>
-                <div class="product_images-thumb-item col-sm-3"
-                    style="background-image: url(https://cdn.shopify.com/s/files/1/0543/1637/products/Leica_M_Edition_60_front_1024x1024@2x.jpg?v=1484764172)"></div>
+                    style="background-image: url({{ $image->url }})"></div>
+                @endforeach
+                
             </div>
         </div>
         <div class="col-sm-7">
-            <h1 class="product_name">Leica M (Typ 240) Edition "Leica 60"</h1>
-            <div>
+            <h1 class="product_name">{{ $product->name }}</h1>
+            <div id="product" data-productid="{{ $product->id }}">
                 <ul class="product_meta">
-                    <li class="product_price"><span>$18,55</span></li>
-                    <li class="product_votes product_votes--voted">
+                    <li class="product_price"><span>${{ $product->price }}</span></li>
+                    <li class="product_votes @if($you->favourites->pluck('product_id')->contains($product->id)){{ __('product_votes--voted')}}@endif">
                         <a href="javascript:;" onclick="addToFavourites(event);" class="product_votes-add-link" title="Add to my favourites">
                             <i class="far fa-heart"></i>
-                            <span>10</span>
+                            <span class="product_votes-count">{{ $product->favouritesCount() }}</span>
                         </a>
                         <a href="javascript:;" onclick="removeFromFavourites(event);" class="product_votes-remove-link" title="Remove from my favourites">
                             <i class="fas fa-heart"></i>
-                            <span>10</span>
+                            <span class="product_votes-count">{{ $product->favouritesCount() }}</span>
                         </a>
                     </li>
                 </ul>
@@ -60,6 +61,9 @@
                     </div>
                 </form>
                 <hr>
+                <div class="product_desc">
+                    {{ $product->description }}
+                </div>
             </div>
             
         </div>
@@ -69,7 +73,7 @@
         <div class="col-md-8">
             <h2 class="box-comment__title">
                 <span>Comments</span>
-                <span class="box-comment__count">18 comments</span>
+                <span class="box-comment__count">{{ $product->commentsCount() }} comments</span>
             </h2>
             <div class="box-comment__list">
                 <p class="box-comment__list-title"><strong>Leave a Comment</strong></p>
@@ -77,20 +81,15 @@
                     <textarea name="comment" id="comment" rows="3" placeholder="Type your comment here"></textarea>
                     <button class="btn btn-primary">Post</button>
                 </div>
+                @foreach ($product->comments as $comment)
                 <div class="box-comment__list-item">
-                    <div class="box-comment__avatar-text">X</div>
+                    <div class="box-comment__avatar-text">{{ $comment->user->name[0] }}</div>
                     <div class="box-comment__main">
-                        <h3 class="box-comment__user-name">XSon</h3>
-                        <p>The screen on this laptop is worth the price by itself. Gorgeous, black is actually black, it rivals my AOC gaming desktop monitor.</p>
+                        <h3 class="box-comment__user-name">{{ $comment->user->name }}</h3>
+                        <p>{{ $comment->content }}</p>
                     </div>
                 </div>
-                <div class="box-comment__list-item">
-                    <div class="box-comment__avatar-text">W</div>
-                    <div class="box-comment__main">
-                        <h3 class="box-comment__user-name">Will</h3>
-                        <p>For what you're paying for the Screen and camera quality is what you pay for. There is a hard drive slot if you choose to expand your storage.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -114,7 +113,9 @@
 </script>
 <script>
     function addToFavourites(e) {
-        postData('{{ route('user.favourites.store') }}', { productId: 1 })
+        const product = document.querySelector('#product');
+        const productId = product.dataset.productid;
+        postData('{{ route('user.favourites.store') }}', { productId })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {
                 toast({
@@ -123,13 +124,20 @@
                     type: key
                 });
             });
-            document.querySelector('.product_votes').classList.add('product_votes--voted');
+            product.classList.add('product_votes--voted');
+            const votesCountElements = document.querySelectorAll('.product_votes-count');
+            votesCountElements.forEach(function (element) {
+                console.log(element.innerHTML);
+                element.innerHTML = parseInt(element.innerHTML) + 1;
+            });
         });
     }
 </script>
 <script>
     function removeFromFavourites(e) {
-        postData('{{ route('user.favourites.destroy') }}', { productId: 1, _method: 'DELETE' })
+        const product = document.querySelector('#product');
+        const productId = product.dataset.productid;
+        postData('{{ route('user.favourites.destroy') }}', { productId, _method: 'DELETE' })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {
                 toast({
@@ -138,16 +146,22 @@
                     type: key
                 });
             });
-            document.querySelector('.product_votes').classList.remove('product_votes--voted');
+            product.classList.remove('product_votes--voted');
+            const votesCountElements = document.querySelectorAll('.product_votes-count');
+            votesCountElements.forEach(function (element) {
+                element.innerHTML = parseInt(element.innerHTML) - 1;
+            });
         });
     }
 </script>
 <script>
     function addToCart(e) {
         e.preventDefault();
+        const product = document.querySelector('#product');
+        const productId = product.dataset.productid;
         const quantityInput = document.querySelector('input[name="quantity"]');
         const quantity = parseInt(quantityInput.getAttribute('value'));
-        postData('{{ route('user.cart.update') }}', { productId: 1, quantity })
+        postData('{{ route('user.cart.update') }}', { productId, quantity })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {
                 toast({
@@ -166,7 +180,6 @@
         let currentQuantity = parseInt(quantityInput.getAttribute('value'));
         currentQuantity++;
         quantityInput.setAttribute('value', currentQuantity);
-        updateCart({diff: 1, quantity: 0});
     }
     function descreaseQuantity(min = 1){
         let quantityInput = document.querySelector('input[name="quantity"]');
@@ -176,7 +189,6 @@
             currentQuantity = min;
         }
         quantityInput.setAttribute('value', currentQuantity);
-        updateCart({diff: -1, quantity: 0});
     }
 </script>
 @endsection

@@ -9,6 +9,7 @@ use App\Models\CustomerData;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\OrderStatus;
+use App\Models\Product;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -17,19 +18,30 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function getFavourites(){
-        return view('pages.user.favourites',[
-        ]);
+        return view('pages.user.favourites');
     }
 
     public function addFavourite(Request $request){
         //Thêm sp vào favourites
+        $user = User::find(Auth::user()->id);
+        $user->favourites()->create(['product_id' => $request->productId]);
         //Tăng số lượt thích
+        $product = Product::find($request->productId);
+        $product->likes++;
+        $product->save();
         return response()->json([
             'success' => 'Added to your favourites'
         ]);
     }
 
     public function removeFavourite(Request $request){
+        //Remove sp ra favourites
+        $user = User::find(Auth::user()->id);
+        $user->favourites()->where('product_id', $request->productId)->delete();
+        //Tăng số lượt thích
+        $product = Product::find($request->productId);
+        $product->likes--;
+        $product->save();
         return response()->json([
             'success' => 'Removed from your favourites'
         ]);
@@ -37,7 +49,7 @@ class UserController extends Controller
 
     public function getCart(){
         $cart = Auth::user()->cart;
-
+        session(['totalQuantity' => $cart->totalQuantity()]);
         return view('pages.user.cart',[
             'cart' => $cart,
         ]);
@@ -45,9 +57,10 @@ class UserController extends Controller
 
     public function updateCart(Request $request){
         //Check product existed.
-
-        //Faked product to test.
-        $product = ['id' => 1,'name' => 'Samsung Galaxy S21 Ultra', 'price' => 32000000];
+        $product = Product::find($request->productId);
+        if($product === null){
+            return abort(404);
+        }
 
         $cart = Auth::user()->cart;
         $input = $request->all();
@@ -55,9 +68,9 @@ class UserController extends Controller
         $messages = [];
 
         //check product in cart
-        if($cart->cartItems()->pluck('product_id')->contains($product['id'])){
+        if($cart->cartItems()->pluck('product_id')->contains($product->id)){
             foreach($cart->cartItems as $cartItem){
-                if($cartItem->product_id == $product['id']){
+                if($cartItem->product_id == $product->id){
                     if(array_key_exists('increment', $input)){
                         $cartItem->quantity += $input['increment'];
                         $messages += ['success' => 'Updated successfully.'];
@@ -92,9 +105,9 @@ class UserController extends Controller
                 $quantity = 1;
             }
             $newCartItem = new CartItem([
-                'product_id' => $product['id'],
+                'product_id' => $product->id,
                 'quantity' => $quantity,
-                'unit_price' => $product['price'],
+                'unit_price' => $product->price,
             ]);
             $cart->cartItems()->save($newCartItem);
 
@@ -107,6 +120,15 @@ class UserController extends Controller
     }
 
     public function removeFromCart(Request $request){
+        $product = Product::find($request->productId);
+        if($product === null){
+            return abort(404);
+        }
+
+        $cart = Auth::user()->cart;
+
+        $cart->cartItems()->where('product_id', $request->productId)->delete();
+        session(['totalQuantity' => $cart->totalQuantity()]);
         return response()->json([
             'success' => 'Removed from your cart.'
         ]);

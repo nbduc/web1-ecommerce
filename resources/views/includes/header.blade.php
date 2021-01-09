@@ -93,7 +93,7 @@
             </div>
         </div>
     </header>
-    <nav class="header__navbar">
+    {{-- <nav class="header__navbar">
         <div class="container header__navbar-wrapper">
             <ul class="header__nav-list">
                 <li class="header__nav-item">
@@ -110,5 +110,5 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> --}}
 </div>

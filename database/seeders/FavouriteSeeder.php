@@ -16,9 +16,6 @@ class FavouriteSeeder extends Seeder
      */
     public function run()
     {
-        $products = Product::all();
-        Favourite::factory()->times(55)->create()->each(function ($favourite) use($products){
-            $favourite->product_id = $products->random(1)->pluck('id')->first();
-        });
+        Favourite::factory()->times(55)->create();
     }
 }

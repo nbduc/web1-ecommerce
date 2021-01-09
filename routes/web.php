@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController as UserController;
-use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\ProductController as ProductController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -20,16 +21,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+//home routes
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/product/1', function () {
-    return view('pages.common.product');
-});
+//product routes
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/search', [ProductController::class, 'search'])->name('product.search');
 
-Route::get('/search', function () {
-    return view('pages.common.search');
-});
-
+//user routes
 Route::prefix('user')->middleware(['auth', 'verified', 'can:is-customer'])->name('user.')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('index');
 
@@ -59,8 +58,8 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'can:is-admin'])->name('
     Route::resource('/users', AdminUserController::class);
 
     //product routes
-    Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
-    Route::resource('/products', ProductController::class);
+    Route::get('/products/search', [AdminProductController::class, 'search'])->name('products.search');
+    Route::resource('/products', AdminProductController::class);
 
     //order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');

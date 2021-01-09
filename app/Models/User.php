@@ -69,7 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function favourites(){
-        return $this->hasMany(Favourites::class);
+        return $this->hasMany(Favourite::class);
     }
 
     public function hasAnyRoles($roles){

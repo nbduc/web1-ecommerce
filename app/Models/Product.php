@@ -72,4 +72,12 @@ class Product extends Model
             ->pluck('product_id')->toArray()
         )->get();
     }
+
+    public function favouritesCount(){
+        return $this->favourites->count();
+    }
+
+    public function commentsCount(){
+        return $this->comments->count();
+    }
 }

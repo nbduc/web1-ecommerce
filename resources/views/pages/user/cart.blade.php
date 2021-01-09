@@ -9,7 +9,6 @@ Cart | {{ config('app.name') }}
 <div class="container">
     <h2 class="cart__header">
         <span>Shopping cart</span>
-        <span class="cart__header-count">{{ $cart->totalQuantity() }} product</span>
     </h2>
     <hr>
     
@@ -27,13 +26,14 @@ Cart | {{ config('app.name') }}
         <div class="row cart__main">
             <div class="col-md-8">
                 <ul class="cart__list">
-                    <li class="cart__list-item" id="1">
+                    @foreach ($cart->cartItems as $item)
+                    <li class="cart__list-item" id="{{ $item->product_id }}">
                         <div class="cart-item__img" 
-                            style="background-image: url(https://cdn.shopify.com/s/files/1/0543/1637/products/Leica_M_Edition_60_1_1024x1024@2x.jpg?v=1484764172)"></div>
+                            style="background-image: url({{ $item->product->feature_img }})"></div>
                         <div class="cart-item__content">
                             <div class="cart-item__desc">
                                 <div class="cart-item__product-name">
-                                    <a href="">Leica M (Typ 240) Edition "Leica 60"</a>
+                                    <a href="{{ route('product.show', $item->product->id) }}">{{ $item->product->name }}</a>
                                 </div>
                                 <div class="cart-item__actions">
                                     <a href="javascript:;" title="Remove from my cart" onclick="removeFromCart(event, this);">Remove</a>
@@ -41,18 +41,19 @@ Cart | {{ config('app.name') }}
                             </div>
                             <div class="cart-item__details">
                                 <div class="cart-item__price">
-                                    {{ $cart->totalPrice() }}đ
+                                    ${{ $item->unit_price }}
                                 </div>
                                 <div class="cart-item__quantity">
                                     <div class="cart-item__quantity--inner">
                                         <div class="cart-item__quantity-descrease" onclick="descreaseQuantity(this);">-</div>
-                                        <input type="number" name="quantity" value="1" onchange="updateQuantity(this);">
+                                        <input type="number" name="quantity" value="{{ $item->quantity }}" onchange="updateQuantity(this);">
                                         <div class="cart-item__quantity-increase" onclick="increaseQuantity(this);">+</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="col-md-4">
@@ -150,11 +151,12 @@ Cart | {{ config('app.name') }}
                 });
             });
             productItem.parentNode.removeChild(productItem);
+            updateCart({diff: (-1)*quantity, quantity: 0});
             const itemCount = document.querySelector('.cart__list').childElementCount;
-            console.log(itemCount);
             if(itemCount === 0){
                 document.querySelector('.cart__wrapper').classList.add('cart--empty');
             }
+
         });
     }
 </script>
