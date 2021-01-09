@@ -48,7 +48,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->description }}</td>
                             <td>{{ $product->price }}</td>
-                            <td>{{ $product->feature_img }}</td>
+                            <td><img src="{{ asset('images/upload/feature_products/'.$product->feature_img) }}" alt="" width="100" height="100"></td>
                             <td>
                                 <a href="{{ route('admin.products.show', $product->id) }}"
                                     class="btn btn-block btn-primary" role="button">View</a>

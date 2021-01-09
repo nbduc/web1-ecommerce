@@ -54,7 +54,18 @@ class ProductController extends Controller
             $product->price=$request->input('price');
             $product->likes=0;
             $product->in_stock=$request->input('in_stock');
-            $product->feature_img="no img"; 
+            if($request->hasFile('feature_img')){
+                $file = $request->file('feature_img'); 
+                $extension = $file->getClientOriginalExtension(); 
+                $filename=$request->input('name').time().'.'.$extension; 
+                $file->move('images/upload/feature_products/',$filename); 
+                $product->feature_img=$filename; 
+            }
+            else
+            {
+                $product->feature_img="no img";
+            }
+             
             $product->save(); 
             $products = Product::paginate(15);
             return view('admin.products.index', [
