@@ -541,7 +541,7 @@
 .box-comment__list-item {
     margin-top: 20px;
     border-bottom: solid 1px var(--border-color);
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 }
 
 .box-comment__avatar-text {

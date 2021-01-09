@@ -27,6 +27,7 @@ Route::get('/', [HomeController::class, 'index']);
 //product routes
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/search', [ProductController::class, 'search'])->name('product.search');
+Route::post('/product/comment', [ProductController::class, 'postComment'])->name('product.post-comment');
 
 //user routes
 Route::prefix('user')->middleware(['auth', 'verified', 'can:is-customer'])->name('user.')->group(function(){

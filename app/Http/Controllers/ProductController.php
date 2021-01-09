@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -42,6 +45,18 @@ class ProductController extends Controller
     }
 
     public function postComment(Request $request){
+        $productId = $request['productId'];
+        $content = $request['content'];
 
+        $messages = [];
+        $user = User::find(Auth::user()->id);
+        if($user === null){
+            $messages += ['warning' => 'You need to be logged in to post a comment'];
+            return response()->json($messages);
+        }
+        $user->comments()->create(['product_id' => $productId, 'content' => $content]);
+        
+        $messages += ['success' => 'Comment successfully posted'];
+        return response()->json($messages);
     }
 }

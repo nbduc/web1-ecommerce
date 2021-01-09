@@ -79,7 +79,7 @@
                 <p class="box-comment__list-title"><strong>Leave a Comment</strong></p>
                 <div class="box-comment__list-textarea">
                     <textarea name="comment" id="comment" rows="3" placeholder="Type your comment here"></textarea>
-                    <button class="btn btn-primary">Post</button>
+                    <button class="btn btn-primary" onclick="postComment(event);">Post</button>
                 </div>
                 @foreach ($product->comments as $comment)
                 <div class="box-comment__list-item">
@@ -189,6 +189,47 @@
             currentQuantity = min;
         }
         quantityInput.setAttribute('value', currentQuantity);
+    }
+</script>
+<script>
+    function createComment(options){
+        const { username, content } = options;
+        let commentList = document.querySelector('.box-comment__list');
+        console.log(commentList);
+        let comment = document.createElement('div');
+        comment.classList.add('box-comment__list-item');
+        comment.innerHTML = 
+        `<div class="box-comment__avatar-text">${username.charAt(0)}</div>
+            <div class="box-comment__main">
+                <h3 class="box-comment__user-name">${username}</h3>
+                <p>${content}</p>
+            </div>
+        </div>`;
+        console.log(comment);
+        console.log(commentList);
+        commentList.appendChild(comment);
+
+    }
+    function postComment(e){
+        e.preventDefault();
+        const product = document.querySelector('#product');
+        const productId = product.dataset.productid;
+        const content = document.querySelector('#comment').value;
+        postData('{{ route('product.post-comment') }}', { productId, content })
+        .then(function(messages){
+                Object.keys(messages).forEach(function (key) {
+                    toast({
+                        title: key,
+                        message: messages[key],
+                        type: key
+                    });
+                });
+                createComment({
+                    username: '{{ $you->name }}',
+                    content
+                });
+            }
+        );
     }
 </script>
 @endsection
