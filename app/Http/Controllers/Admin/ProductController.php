@@ -48,7 +48,19 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-	
+            $product = new Product(); 
+            $product->name=$request->input('name'); 
+            $product->description=$request->input('description');
+            $product->price=$request->input('price');
+            $product->likes=0;
+            $product->in_stock=$request->input('in_stock');
+            $product->feature_img="no img"; 
+            $product->save(); 
+            $products = Product::paginate(15);
+            return view('admin.products.index', [
+                'products' => $products,
+                'you' => Auth::user()
+            ]);
     }
 
     public function search(Request $request)
