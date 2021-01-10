@@ -37,7 +37,7 @@
                         <div class="product-list-item__img" style="background-image: url({{asset('images/upload/feature_products/'.$product->feature_img)}});"></div>
                         <h4 class="product-list-item__name">{{ $product->name }}</h4>
                         <div class="product-list-item__price">
-                            <span>${{ $product->price }}</span>
+                            <span>{{ $product->price }}₫</span>
                         </div>
                         <div class="product-list-item__votes">
                             <i class="product-list-item__vote-icon fas fa-heart"></i>
