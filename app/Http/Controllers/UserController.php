@@ -148,10 +148,20 @@ class UserController extends Controller
         $input = $request->validated();
         $user = User::find(Auth::user()->id);
 
-        $user->update($request->only(['name', 'email']));
-        $user->customerData()->update($request->only(['phone', 'ship_address']));
+        //check email
+        $checkUser = User::where('email', $input['email'])->first();
+        if($checkUser !== null){
+            if($checkUser->id == $user->id){
+                $request->session()->flash('error', "That email is existed.");
+                return redirect($input['redirectTo']);
+            }
+        } else {
+            $user->update($request->only(['name', 'email']));
+            $user->customerData()->update($request->only(['phone', 'ship_address']));
+    
+            return redirect($input['redirectTo']);
+        }
 
-        return redirect($input['redirectTo']);
     }
 
     public function getOrder(Request $request){
