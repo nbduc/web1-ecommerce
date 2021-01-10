@@ -33,7 +33,10 @@
                     <tr>
                         <th>#Id</th>
                         <th>Name</th>
-                        <th>tuan</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Image</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -43,6 +46,9 @@
                         <tr>
                             <td>{{ $product->id }}</td>
                             <td>{{ $product->name }}</td>
+                            <td>{{ $product->description }}</td>
+                            <td>{{ $product->price }}</td>
+                            <td><img src="{{ asset('images/upload/feature_products/'.$product->feature_img) }}" alt="" width="100" height="100"></td>
                             <td>
                                 <a href="{{ route('admin.products.show', $product->id) }}"
                                     class="btn btn-block btn-primary" role="button">View</a>

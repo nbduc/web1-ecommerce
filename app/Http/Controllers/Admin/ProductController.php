@@ -48,19 +48,54 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-	
+            $product = new Product(); 
+            $product->name=$request->input('name'); 
+            $product->description=$request->input('description');
+            $product->price=$request->input('price');
+            $product->likes=0;
+            $product->in_stock=$request->input('in_stock');
+            if($request->hasFile('feature_img')){
+                $file = $request->file('feature_img'); 
+                $extension = $file->getClientOriginalExtension(); 
+                $filename=$request->input('name').time().'.'.$extension; 
+                $file->move('images/upload/feature_products/',$filename); 
+                $product->feature_img=$filename; 
+            }
+            else
+            {
+                $product->feature_img="no img";
+            }
+             
+            $product->save(); 
+            $products = Product::paginate(15);
+            return view('admin.products.index', [
+                'products' => $products,
+                'you' => Auth::user()
+            ]);
     }
 
     public function search(Request $request)
     {
         $search = $request->get('search');
-        // $products = Product::where('name', 'like', '%' . $search . '%')
-            // ->paginate(5);
+        if($search!=""){
+            $products = Product::where(function ($query) use ($search){
+                $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('price', $search)
+                ->orWhere('description', 'like', '%'.$search.'%');
+            })
+            ->paginate(15);
+            $products->appends(['search' => $search]);
+        }
+        else{
+            $products = Product::paginate(15);
+        }
         return view('admin.products.index', [
-            // 'products' => $products,
+            'products' => $products,
+            'search' => $search,
+            'you' => Auth::user()
         ]);
+        
     }
-
     /**
      * Display the specified resource.
      *
@@ -69,7 +104,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-	
+        return view('admin.products.show', [
+            'products' => Product::find($id),
+        ]);
     }
 
     /**
