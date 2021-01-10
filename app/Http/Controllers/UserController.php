@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function getFavourites(){
-        return view('pages.user.favourites');
+        $user = User::find(Auth::user()->id);
+        $favourites = $user->favourites;
+        return view('pages.user.favourites', [
+            'favourites' => $favourites,
+        ]);
     }
 
     public function addFavourite(Request $request){
