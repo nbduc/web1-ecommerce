@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function index(){
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
         if($user != null && $user->hasRole('Customer')){
             $user = User::find(Auth::user()->id);
             $cart = $user->cart;

@@ -49,7 +49,7 @@ class ProductController extends Controller
         $content = $request['content'];
 
         $messages = [];
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
         if($user === null){
             $messages += ['warning' => 'You need to be logged in to post a comment'];
             return response()->json($messages);
