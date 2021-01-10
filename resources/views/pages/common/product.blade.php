@@ -33,6 +33,7 @@
             <div id="product" data-productid="{{ $product->id }}">
                 <ul class="product_meta">
                     <li class="product_price"><span>${{ $product->price }}</span></li>
+                    @auth
                     <li class="product_votes @if($you->favourites->pluck('product_id')->contains($product->id)){{ __('product_votes--voted')}}@endif">
                         <a href="javascript:;" onclick="addToFavourites(event);" class="product_votes-add-link" title="Add to my favourites">
                             <i class="far fa-heart"></i>
@@ -43,6 +44,14 @@
                             <span class="product_votes-count">{{ $product->favouritesCount() }}</span>
                         </a>
                     </li>
+                    @else
+                    <li class="product_votes">
+                        <a href="javascript:;" class="product_votes-add-link">
+                            <i class="fas fa-heart"></i>
+                            <span class="product_votes-count">{{ $product->favouritesCount() }}</span>
+                        </a>
+                    </li>
+                    @endauth
                 </ul>
                 <hr>
                 <div class="cart-item__quantity">
@@ -76,11 +85,13 @@
                 <span class="box-comment__count">{{ $product->commentsCount() }} comments</span>
             </h2>
             <div class="box-comment__list">
+                @auth
                 <p class="box-comment__list-title"><strong>Leave a Comment</strong></p>
                 <div class="box-comment__list-textarea">
                     <textarea name="comment" id="comment" rows="3" placeholder="Type your comment here"></textarea>
                     <button class="btn btn-primary" onclick="postComment(event);">Post</button>
                 </div>
+                @endauth
                 @foreach ($product->comments as $comment)
                 <div class="box-comment__list-item">
                     <div class="box-comment__avatar-text">{{ $comment->user->name[0] }}</div>
@@ -111,6 +122,7 @@
         imgWrapper.style.backgroundImage = e.currentTarget.style.backgroundImage;
     }
 </script>
+@auth
 <script>
     function addToFavourites(e) {
         const product = document.querySelector('#product');
@@ -154,6 +166,7 @@
         });
     }
 </script>
+@endauth
 <script>
     function addToCart(e) {
         e.preventDefault();
@@ -170,7 +183,9 @@
                     type: key
                 });
             });
+            @auth
             updateCart({diff: quantity, quantity: 0});
+            @endauth
         });
     }
 </script>
@@ -191,6 +206,7 @@
         quantityInput.setAttribute('value', currentQuantity);
     }
 </script>
+@auth
 <script>
     function createComment(options){
         const { username, content } = options;
@@ -232,4 +248,5 @@
         );
     }
 </script>
+@endauth
 @endsection

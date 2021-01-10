@@ -8,6 +8,17 @@
 <div class="container">
     <h2 class="profile__heading">Your profile</h2>
     <hr>
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+    @endif
     <div class="profile-form">
         <form method="POST" action="{{ route('user.profile.update') }}">
             @csrf
