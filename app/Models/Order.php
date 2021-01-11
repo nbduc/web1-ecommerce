@@ -18,6 +18,7 @@ class Order extends Model
         'user_id',
         'ship_date',
         'ship_address',
+        'updated_at',
         'status_id',
     ];
 

@@ -80,4 +80,5 @@ class Product extends Model
     public function commentsCount(){
         return $this->comments->count();
     }
+
 }

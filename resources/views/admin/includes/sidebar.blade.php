@@ -16,6 +16,9 @@
             <a href="{{ route('admin.orders.index') }}" class="c-sidebar-nav-link">Order Management</a>
         </li>
         <li class="c-sidebar-nav-item">
+            <a href="{{ route('admin.reports.index') }}" class="c-sidebar-nav-link">Reporting</a>
+        </li>
+        <li class="c-sidebar-nav-item">
             <a href="{{ route('logout') }}" class="c-sidebar-nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" hidden>@csrf</form>
         </li>

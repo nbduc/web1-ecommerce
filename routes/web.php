@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\UserController as UserController;
 use App\Http\Controllers\ProductController as ProductController;
 use App\Http\Controllers\SearchController;
@@ -61,6 +62,11 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'can:is-admin'])->name('
     //product routes
     Route::get('/products/search', [AdminProductController::class, 'search'])->name('products.search');
     Route::resource('/products', AdminProductController::class);
+
+    //reportings routes
+    Route::get('/reports', [AdminReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/search', [AdminReportController::class, 'search'])->name('reports.search');
+    Route::resource('/report', AdminReportController::class);
 
     //order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
