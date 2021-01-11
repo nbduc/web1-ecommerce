@@ -22,7 +22,7 @@
             @foreach ($products as $product)
             <div class="col-md-2">
                 <a href="{{ route('product.show', $product->id) }}" class="product-list-item">
-                    <div class="product-list-item__img" style="background-image: url({{ $product->feature_img }});"></div>
+                    <div class="product-list-item__img" style="background-image: url({{asset('images/upload/feature_products/'.$product->feature_img)}});"></div>
                     <h4 class="product-list-item__name">{{ $product->name }}</h4>
                     <div class="product-list-item__price">
                         <span>${{ $product->price }}</span>
