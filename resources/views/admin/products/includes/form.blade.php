@@ -12,35 +12,84 @@
 </div>
 <div class="form-group">
     <label for="price">Price</label>
-    <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Example: 21.990.000" name="price" >
+    <input class="form-control @error('price') is-invalid @enderror" type="text" placeholder="Example: 21.990.000" name="price" required
+        value="{{ old('price') }}@isset($product){{ $product->price }}@endisset">
+    @error('price')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="in_stock">In Stock(Max:1000)</label>
-    <input class="form-control @error('name') is-invalid @enderror" type="number"  name="in_stock" min="1" max="1000">
+    <input class="form-control @error('in_stock') is-invalid @enderror" type="number"  name="in_stock" min="1" max="1000" required
+        value="{{ old('in_stock') }}@isset($product){{ $product->in_stock }}@endisset">
+    @error('in_stock')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="display">Display</label>
-    <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Example: Retina" name="display" >
+    <input class="form-control @error('display') is-invalid @enderror" type="text" placeholder="Example: Retina" name="display" required
+        value="{{ old('display') }}@isset($product){{ $product->productDetail->display }}@endisset">
+    @error('display')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="front_camera">Front Camera</label>
-    <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Example: 12MP" name="front_camera" >
+    <input class="form-control @error('front_camera') is-invalid @enderror" type="text" placeholder="Example: 12MP" name="front_camera" required
+        value="{{ old('front_camera') }}@isset($product){{ $product->productDetail->front_camera }}@endisset">
+    @error('front_camera')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="rear_camera">Rear Camera</label>
-    <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Example: 12MP" name="rear_camera" >
+    <input class="form-control @error('rear_camera') is-invalid @enderror" type="text" placeholder="Example: 12MP" name="rear_camera" required
+        value="{{ old('rear_camera') }}@isset($product){{ $product->productDetail->rear_camera }}@endisset">
+    @error('rear_camera')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="storage">Storage</label>
-    <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Example: 32GB" name="storage" >
+    <input class="form-control @error('storage') is-invalid @enderror" type="text" placeholder="Example: 32GB" name="storage" required
+        value="{{ old('storage') }}@isset($product){{ $product->productDetail->storage }}@endisset">
+    @error('storage')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="os">OS</label>
-    <input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Example: ios 14" name="os" >
+    <input class="form-control @error('os') is-invalid @enderror" type="text" placeholder="Example: ios 14" name="os" required
+        value="{{ old('os') }}@isset($product){{ $product->productDetail->os }}@endisset">
+    @error('os')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="description">Description</label>
-    <textarea class="form-control @error('name') is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+    <textarea class="form-control @error('description') is-invalid @enderror" id="exampleFormControlTextarea1" rows="3" name="description" required
+        value="{{ old('description') }}@isset($product){{ $product->description }}@endisset">
+    </textarea>
+    @error('description')
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
 <div class="form-group">
     <label for="feature_img">Feature Img</label>

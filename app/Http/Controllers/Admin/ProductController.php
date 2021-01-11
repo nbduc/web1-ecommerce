@@ -9,7 +9,7 @@ use App\Models\Product;
 use GuzzleHttp\Handler\Proxy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Gate;
 class ProductController extends Controller
 {
     /**
@@ -106,6 +106,7 @@ class ProductController extends Controller
     {
         return view('admin.products.show', [
             'products' => Product::find($id),
+            'you' => Auth::user()
         ]);
     }
 
@@ -119,7 +120,8 @@ class ProductController extends Controller
     {
         //
         return view('admin.products.edit', [
-            // 'product' => Product::find($id),
+            'product' => Product::find($id),
+            'you' => Auth::user()
             ]
         );
     }
@@ -133,7 +135,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $product = Product::find($id);
+        if(!$product){
+            $request->session()->flash('error', "You cannot edit this product.");
+        }
+        //$product->update($request);
+
+        $request->session()->flash('success', "You have edited the product.");
+
+        return redirect(route('admin.products.index'));
     }
 
     /**
@@ -142,8 +153,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        if (Gate::allows('is-me', $id)) {
+            $request->session()->flash('error', "You don't have permission to delete this product!");
+        } else {
+            Product::destroy($id);
+            $request->session()->flash('success', "You have deleted the product.");
+        }
+        return redirect(route('admin.products.index'));
     }
 }

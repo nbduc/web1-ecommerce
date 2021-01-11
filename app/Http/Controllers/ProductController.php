@@ -29,7 +29,9 @@ class ProductController extends Controller
         $search = $request->get('q');
         if($search!=""){
             $products = Product::where(function ($query) use ($search){
-                $query->where('name', 'like', '%'.$search.'%');
+                $query->where('name', 'like', '%'.$search.'%')
+                ->orWhere('price', $search)
+                ->orWhere('description', 'like', '%'.$search.'%');
             })
             ->paginate(20);
             $products->appends(['q' => $search]);
