@@ -104,7 +104,7 @@ class UserController extends Controller
         } else {
             $quantity = 0;
             if(array_key_exists('quantity', $input)){
-                $quantity = $input['quantity'] < 1 ? $input['quantity'] : 1;
+                $quantity = $input['quantity'] > 1 ? $input['quantity'] : 1;
             } else {
                 $quantity = 1;
             }

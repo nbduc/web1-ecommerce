@@ -176,6 +176,7 @@
         const productId = product.dataset.productid;
         const quantityInput = document.querySelector('input[name="quantity"]');
         const quantity = parseInt(quantityInput.getAttribute('value'));
+        console.log(quantity);
         postData('{{ route('user.cart.update') }}', { productId, quantity })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {

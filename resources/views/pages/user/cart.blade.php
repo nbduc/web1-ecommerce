@@ -67,14 +67,14 @@ Cart | {{ config('app.name') }}
                     </p>
                     <span class="cart__address-content">
                         
-                        @isset($you->customerData)
+                        @if($you->customerData->phone !== null || $you->customerData->email !== null)
                         Phone: {{ $you->customerData->phone }}
                         <br>
                         Ship address: {{ $you->customerData->ship_address }}
                         @else
                         <small style="display: block;">You have not provided your shipping address and phone number!</small>
                         Add phone and ship address <a href="{{ route('user.profile.index') }}">here</a>.
-                        @endisset
+                        @endif
                     </span>
                 </div>
                 <hr>
@@ -152,6 +152,8 @@ Cart | {{ config('app.name') }}
         e.preventDefault();
         const productItem = getParent(element, '.cart__list-item');
         const productId = productItem.id;
+        let quantityInput = productItem.querySelector('input[name="quantity"]');
+        let quantity = parseInt(quantityInput.getAttribute('value'));
         postData('{{ route('user.cart.remove') }}', { productId, _method: "DELETE" })
         .then(messages => {
             Object.keys(messages).forEach(function (key) {
@@ -162,6 +164,7 @@ Cart | {{ config('app.name') }}
                 });
             });
             productItem.parentNode.removeChild(productItem);
+            console.log((-1)*quantity);
             updateCart({diff: (-1)*quantity, quantity: 0});
             const itemCount = document.querySelector('.cart__list').childElementCount;
             if(itemCount === 0){
