@@ -95,6 +95,24 @@
     <label for="feature_img">Feature Img</label>
     <input type="file" class="form-control-file @error('name') is-invalid @enderror" id="exampleFormControlFile1" name="feature_img">
 </div>
+<div class="form-group">
+
+    <label for="sup_img">Product Imgs</label>
+    <div class="form-group">
+        <label for="sup_img">Product Img 1</label>
+        <input type="file" class="form-control-file @error('name') is-invalid @enderror" id="exampleFormControlFile1" name="sup_img1">
+    </div>
+    <div class="form-group">
+        <label for="sup_img">Product Img 2</label>
+        <input type="file" class="form-control-file @error('name') is-invalid @enderror" id="exampleFormControlFile1" name="sup_img2">
+    </div>
+    <div class="form-group">
+        <label for="sup_img">Product Img 3</label>
+        <input type="file" class="form-control-file @error('name') is-invalid @enderror" id="exampleFormControlFile1" name="sup_img3">
+    </div>
+ 
+</div>
+
 <div id="editor"></div>
 <br>
 <button class="btn btn-block btn-success" type="submit">Submit</button>
