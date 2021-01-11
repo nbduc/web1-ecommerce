@@ -26,7 +26,7 @@ class AddForeignKeyContraintToFavouritesTable extends Migration
     public function down()
     {
         Schema::table('favourites', function (Blueprint $table) {
-            //
+            $table->dropForeign('favourites_product_id_foreign');
         });
     }
 }

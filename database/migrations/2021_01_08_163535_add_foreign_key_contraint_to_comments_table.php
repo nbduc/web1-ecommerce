@@ -26,7 +26,7 @@ class AddForeignKeyContraintToCommentsTable extends Migration
     public function down()
     {
         Schema::table('comments', function (Blueprint $table) {
-            //
+            $table->dropForeign('comments_product_id_foreign');
         });
     }
 }

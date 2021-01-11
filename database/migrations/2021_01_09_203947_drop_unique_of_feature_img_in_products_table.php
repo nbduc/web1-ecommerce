@@ -27,8 +27,7 @@ class DropUniqueOfFeatureImgInProductsTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            //
-            $table->unique('feature_img');
+            
         });
     }
 }

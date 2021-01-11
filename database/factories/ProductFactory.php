@@ -39,9 +39,20 @@ class ProductFactory extends Factory
                 'Xiaomi POCO X3 NFC',
                 'Nokia 5.4',
             ]),
-            'feature_img' => '/storage/images/'.$this->faker->image('public/storage/images',165,165, null, false),
+            /*'feature_img' => '/storage/images/'.$this->faker->image('public/storage/images',165,165, null, false),*/
+            'feature_img' => $this->faker->randomElement([
+                'iphone-11-pro-max-512gb-gold-400x400.jpg',
+                'iphone-12-pro-max-xanh-duong-new-600x600-600x600.jpg',
+                'iphone-12-pro-xam-new-600x600-600x600.jpg',
+                'iphone-12-pro-xanh-duong-new-600x600-600x600.jpg',
+                'iphone-12-red.jpg',
+                'iphone1264gb.jpg',
+                'samsung-galaxy-a12-trang-600x600-600x600.jpg',
+                'samsung-galaxy-z-fold-2-vang-600x600-600x600.jpg',
+            
+            ]),
             'description' => $this->faker->paragraph($nbSentences = 20, $variableNbSentences = true),
-            'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 999, $max = 99),
+            'price' => $this->faker->randomElement(['23.990.000','30.990.000','50.000.000','29.990.000','16.490.000']),
             'likes' => $this->faker->randomNumber($nbDigits = 2, $strict = false),
             'in_stock' => $this->faker->randomNumber($nbDigits = 2, $strict = false),
         ];

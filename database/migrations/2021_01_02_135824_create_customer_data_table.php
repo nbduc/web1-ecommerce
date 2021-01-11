@@ -14,8 +14,8 @@ class CreateCustomerDataTable extends Migration
     public function up()
     {
         Schema::create('customer_data', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->primary('user_id');
             $table->string('phone');
             $table->string('ship_address');
         });

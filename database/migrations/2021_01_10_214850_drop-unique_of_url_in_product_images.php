@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddForeignKeyContraintToCartItemsTable extends Migration
+class DropUniqueOfUrlInProductImages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddForeignKeyContraintToCartItemsTable extends Migration
      */
     public function up()
     {
-        Schema::table('cart_items', function (Blueprint $table) {
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+        Schema::table('product_images', function (Blueprint $table) {
+            //
+            $table->dropUnique('product_images_url_unique');
         });
     }
 
@@ -25,8 +26,9 @@ class AddForeignKeyContraintToCartItemsTable extends Migration
      */
     public function down()
     {
-        Schema::table('cart_items', function (Blueprint $table) {
-            $table->dropForeign('cart_items_product_id_foreign');
+        Schema::table('product_images', function (Blueprint $table) {
+            //
+            $table->unique('url');
         });
     }
 }

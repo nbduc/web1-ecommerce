@@ -27,8 +27,7 @@ class AddNullableToPhoneColumnAndShipAddressColumnInCustomerDataTable extends Mi
     public function down()
     {
         Schema::table('customer_data', function (Blueprint $table) {
-            $table->string('phone')->change();
-            $table->string('ship_address')->change();
+            
         });
     }
 }

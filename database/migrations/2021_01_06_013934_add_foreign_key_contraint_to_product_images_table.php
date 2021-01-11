@@ -28,9 +28,7 @@ class AddForeignKeyContraintToProductImagesTable extends Migration
     public function down()
     {
         Schema::table('product_images', function (Blueprint $table) {
-            //
-            // $table->integer('product_id')->change();
-            // $table->dropForeign('product_images_product_id_foreign');
+            $table->dropForeign('product_images_product_id_foreign');
         });
     }
 }

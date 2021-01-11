@@ -18,12 +18,14 @@
     </nav>
     <div class="row">
         <div class="col-sm-5 product_images">
-            <div class="product_images-wrapper"></div>
+            <div class="product-list-item__img" style="background-image: url({{asset('images/upload/feature_products/'.$product->feature_img)}});"></div>
+            <!--<div class="product_images-wrapper" style="background-image: url({{asset('images/upload/feature_products/'.$product->feature_img)}});"></div>-->
             <div class="product_images-thumb row">
                 {{-- product images here --}}
                 @foreach ($product->productImages as $image)
                 <div class="product_images-thumb-item col-sm-3"
-                    style="background-image: url({{ $image->url }})"></div>
+                    style="background-image: url({{asset('images/upload/product_imgs/'.$image->url)}});
+                    background-size: cover;"></div>
                 @endforeach
                 
             </div>
