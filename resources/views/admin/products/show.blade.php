@@ -38,7 +38,7 @@
                             <li class="list-group-item list-group-item-action"><strong>Images:</strong> <img src="{{ asset('images/upload/feature_products/'.$products->feature_img) }}" alt="" width="100" height="100">  </li>
                         </ul>
                     </p>
-                    <a href="{{ route('admin.products.edit', $products->id) }}" class="btn btn-primary">Edit profile</a>
+                    <a href="{{ route('admin.products.edit', $products->id) }}" class="btn btn-primary">Edit Information</a>
                 </div>
             </div>
         </div>

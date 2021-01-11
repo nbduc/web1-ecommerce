@@ -137,11 +137,16 @@ class ProductController extends Controller
     {
         
         $product = Product::find($id);
-        if(!$product){
-            $request->session()->flash('error', "You cannot edit this product.");
-        }
-        //$product->update($request);
-
+        $product->name = Request()->name;
+        $product->price = Request()->price;
+        $product->in_stock = Request()->in_stock;
+        $product->productDetail->display = Request()->display;
+        $product->productDetail->front_camera = Request()->front_camera;
+        $product->productDetail->rear_camera = Request()->rear_camera;
+        $product->productDetail->storage = Request()->storage;
+        $product->description = Request()->description;
+        $product->productDetail->os = Request()->os;
+        $product->update();
         $request->session()->flash('success', "You have edited the product.");
 
         return redirect(route('admin.products.index'));
